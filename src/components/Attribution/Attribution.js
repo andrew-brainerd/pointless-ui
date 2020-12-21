@@ -5,6 +5,10 @@ const iconCreators = [
   {
     authorName: 'Freepik',
     authorLink: 'https://www.flaticon.com/authors/freepik'
+  },
+  {
+    authorName: 'Smashicons',
+    authorLink: 'https://www.flaticon.com/authors/smashicons'
   }
 ];
 
