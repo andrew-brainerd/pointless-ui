@@ -1,0 +1,11 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  // z-index: 10;
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}

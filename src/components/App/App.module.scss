@@ -1,0 +1,16 @@
+.app {
+  color: white;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1050px;
+  overflow-y: auto;
+  padding-top: 50px;
+
+  .attribution {
+    bottom: 0;
+    font-size: 12px;
+    position: absolute;
+  }
+}

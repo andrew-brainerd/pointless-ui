@@ -1,0 +1,16 @@
+.userSearch {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-width: 750px;
+  width: 90%;
+
+  .userInputContainer {
+    width: 70%;
+
+    .userInput {
+      text-indent: 10px;
+      width: 100%;
+    }
+  }
+}

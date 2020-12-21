@@ -1,0 +1,33 @@
+@import '../../styles/colors';
+
+.pool {
+  align-items: center;
+  color: white;
+  display: grid;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 0 50px 75px 50px;
+
+  .wager {
+    background: $gray-70;
+    border: 2px solid $gray-0;
+    border-radius: 5px;
+    color: $gray-0;
+    cursor: pointer;
+    height: 150px;
+    margin: 10px auto;
+    padding: 7px 10px;
+    width: 250px;
+
+    .amount {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 20px;
+    }
+  }
+}

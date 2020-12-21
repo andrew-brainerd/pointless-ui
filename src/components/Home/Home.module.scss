@@ -1,0 +1,37 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+@import '../../styles/sizing';
+
+.home {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 75px auto;
+  width: 100%;
+
+  .pageHeader {
+    padding: 50px 0 0 0;
+
+    img {
+      margin: 10px auto 50px auto;
+      width: 150px;
+    }
+  }
+
+  .pool {
+    border: 2px solid $gray-20;
+    border-radius: 5px;
+    color: $gray-20;
+    cursor: pointer;
+    font-size: 26px;
+    margin: 10px auto;
+    opacity: 0.9;
+    padding: 7px 10px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $gray-0;
+      color: $gray-0;
+    }
+  }
+}
