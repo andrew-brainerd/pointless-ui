@@ -1,27 +1,17 @@
 import { connect } from 'react-redux';
-import { getIsLoadingUser } from '../../selectors/user';
+import { getCurrentUserEmail } from '../../selectors/user';
+import { getUserPools } from '../../selectors/pools';
+import { loadPools } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import Home from './Home';
 
 const mapStateToProps = state => ({
-  isLoadingUser: getIsLoadingUser(state),
-  userPools: [
-    {
-      id: 0,
-      name: 'Test Pool 1'
-    },
-    {
-      id: 1,
-      name: 'Test Pool 2'
-    },
-    {
-      id: 2,
-      name: 'Test Pool 3'
-    }
-  ]
+  userEmail: getCurrentUserEmail(state),
+  userPools: getUserPools(state)
 });
 
 const mapDispatchToProps = dispatch => ({
+  loadUserPools: userEmail => dispatch(loadPools(userEmail)),
   navTo: path => dispatch(navTo(path))
 });
 
