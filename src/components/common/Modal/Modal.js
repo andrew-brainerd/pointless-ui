@@ -57,6 +57,6 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   isDraggable: true
-}
+};
 
 export default Modal;

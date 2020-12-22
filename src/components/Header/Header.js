@@ -6,7 +6,7 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ connectClient, setCurrentUser, navTo }) => {
+const Header = ({ connectClient, setCurrentUser, notify, navTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, isLoading, user } = useAuth0();
   const menuRef = useRef();
@@ -16,8 +16,12 @@ const Header = ({ connectClient, setCurrentUser, navTo }) => {
   }, [user, setCurrentUser]);
 
   useEffect(() => {
-    user && connectClient(user.email, 'poolCreated', data => { console.log('Data', data); });
-  }, [user, connectClient]);
+    user && connectClient(
+      user.email,
+      'poolCreated',
+      data => notify(data.category, data.title, data.message)
+    );
+  }, [user, connectClient, notify]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
@@ -69,6 +73,7 @@ const Header = ({ connectClient, setCurrentUser, navTo }) => {
 Header.propTypes = {
   connectClient: func.isRequired,
   setCurrentUser: func.isRequired,
+  notify: func.isRequired,
   navTo: func.isRequired
 };
 

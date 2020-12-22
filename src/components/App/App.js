@@ -7,6 +7,7 @@ import { HOME_ROUTE, POOL_ROUTE } from '../../constants/routes';
 import Home from '../Home/container';
 import Header from '../Header/container';
 import Pool from '../Pool/container';
+import Notification from '../common/Notification/container';
 // import Attribution from '../Attribution/Attribution';
 import styles from './App.module.scss';
 
@@ -28,6 +29,7 @@ const App = ({ history }) => {
           </Switch>
         </ConnectedRouter>
       </Auth0Provider>
+      <Notification />
       {/* <Attribution /> */}
     </div>
   );

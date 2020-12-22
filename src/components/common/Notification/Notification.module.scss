@@ -1,0 +1,68 @@
+@import '../../../styles/colors.scss';
+
+.notification {
+  align-items: center;
+  background: $gray-70;
+  border-radius: 25px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  color: $gray-0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  margin: auto;
+  max-width: 500px;
+  min-width: 150px;
+  opacity: 1;
+  overflow-y: hidden;
+  padding: 15px 25px;
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  transition: 0.5s all cubic-bezier(0, 1, 0.5, 1);
+  width: 50%;
+
+  &.success {
+    background: #45724c;
+  }
+
+  &.mobile {
+    width: 75%;
+  }
+
+  .content {
+    .title {
+      color: $gray-20;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .message {
+      font-size: 20px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .icon {
+    width: 50px;
+  }
+}
+
+.hidden {
+  bottom: -100px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 650px) {
+  .notification {
+    min-width: 50px;
+    width: 75%;
+  }
+}
