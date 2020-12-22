@@ -35,7 +35,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, navTo }) => {
               setIsModalOpen(true);
             }}
           >
-            <div className={styles.amount}>{wager.amount}</div>
+            <div className={styles.amount}>{wager.amount} pts.</div>
             <div className={styles.description}>{wager.description}</div>
           </div>
         ))}

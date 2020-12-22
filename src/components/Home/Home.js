@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { bool, string, array, func } from 'prop-types';
+import { isMobile } from 'react-device-detect';
 import { useAuth0 } from '@auth0/auth0-react';
 import { POOL_ROUTE } from '../../constants/routes';
 import Loading from '../common/Loading/Loading';
@@ -13,7 +14,7 @@ const Home = ({ userEmail, userPools, loadUserPools, navTo }) => {
   }, [isLoading, userEmail, loadUserPools]);
 
   return isLoading ? <Loading /> : (
-    <div className={styles.home}>
+    <div className={[styles.home, isMobile ? styles.mobile : ''].join(' ')}>
       <div className={styles.pageHeader}>
         <div className={styles.myPools}>
           {userPools.map(({ _id, name }) => {

@@ -21,16 +21,18 @@ describe('Notify Reducer', () => {
         message: null
       };
 
+      const category = 'success';
       const title = 'New Notification';
       const message = 'notification';
 
       const expectedState = {
         hidden: false,
+        category,
         title,
         message
       };
 
-      const action = showNotification(title, message);
+      const action = showNotification(category, title, message);
 
       const newState = reducer(initialState, action);
 

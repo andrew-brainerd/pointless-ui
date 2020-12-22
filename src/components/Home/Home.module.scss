@@ -4,8 +4,6 @@
 
 .home {
   align-items: center;
-  display: flex;
-  flex-direction: column;
   margin: 0 auto 75px auto;
   width: 100%;
 
@@ -18,20 +16,14 @@
     }
   }
 
-  .pool {
-    border: 2px solid $gray-20;
-    border-radius: 5px;
-    color: $gray-20;
-    cursor: pointer;
-    font-size: 26px;
-    margin: 10px auto;
-    opacity: 0.9;
-    padding: 7px 10px;
-    transition: all 0.3s ease;
+  .myPools {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
 
-    &:hover {
-      border-color: $gray-0;
-      color: $gray-0;
+    .pool {
+      @include gridTile();
     }
   }
 }

@@ -55,14 +55,15 @@
     "lint:js": "eslint src/",
     "lint:css": "stylelint --config stylelint.json **/*.scss",
     "coverage": "yarn test --coverage --coverageDirectory coverage --watchAll=false",
-    "verify": "yarn run lint:js && yarn run lint:css && yarn test"
+    "verify": "yarn lint:js && yarn lint:css && yarn test"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn run verify"
+      "pre-commit": "yarn lint:js && yarn lint:css",
+      "pre-push": "yarn verify"
     }
   },
   "browserslist": {
