@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { shape, string, func } from 'prop-types';
+import { func } from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
 import { HOME_ROUTE } from '../../constants/routes';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ currentUser, setCurrentUser, navTo }) => {
+const Header = ({ connectClient, setCurrentUser, navTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, isLoading, user } = useAuth0();
   const menuRef = useRef();
-  const username = (currentUser || {}).username;
 
   useEffect(() => {
     user && setCurrentUser(user);
   }, [user, setCurrentUser]);
+
+  useEffect(() => {
+    user && connectClient(user.email, 'poolCreated', data => { console.log('Data', data); });
+  }, [user, connectClient]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
@@ -28,7 +31,7 @@ const Header = ({ currentUser, setCurrentUser, navTo }) => {
         >
           |||
         </div>
-        <div className={styles.player}>{username}</div>
+        <div className={styles.player}>{(user || {}).email}</div>
       </div>
       {isMenuOpen &&
         <div className={styles.headerMenu} ref={menuRef}>
@@ -64,9 +67,7 @@ const Header = ({ currentUser, setCurrentUser, navTo }) => {
 };
 
 Header.propTypes = {
-  currentUser: shape({
-    username: string
-  }),
+  connectClient: func.isRequired,
   setCurrentUser: func.isRequired,
   navTo: func.isRequired
 };

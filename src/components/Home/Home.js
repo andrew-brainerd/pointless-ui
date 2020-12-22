@@ -9,7 +9,6 @@ const Home = ({ userEmail, userPools, loadUserPools, navTo }) => {
   const { isLoading } = useAuth0();
 
   useEffect(() => {
-    console.log('%cUser email', 'color: cyan', userEmail);
     !isLoading && userEmail && loadUserPools(userEmail);
   }, [isLoading, userEmail, loadUserPools]);
 
