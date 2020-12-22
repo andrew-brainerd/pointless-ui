@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore, { history, sagaMiddleware } from './store/configureStore';
 import sagas from './sagas';
 import App from './components/App/App';
+import ReactModal from 'react-modal';
 import './index.scss';
 
 WebFont.load({
@@ -26,3 +27,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+ReactModal.setAppElement(document.getElementById('root'));

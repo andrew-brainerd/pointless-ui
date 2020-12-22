@@ -9,7 +9,7 @@ export const initialState = {
   isLoadingPools: false,
   isLoadingPool: false,
   userPools: [],
-  selectedPool: null
+  selectedPool: {}
 };
 
 const pools = (state = initialState, action) => {

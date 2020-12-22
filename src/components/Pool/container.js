@@ -1,55 +1,18 @@
 import { connect } from 'react-redux';
 import { getPoolId } from '../../selectors/routing';
+import { getSelectedPool, getIsLoadingPool } from '../../selectors/pools';
 import { navTo } from '../../actions/routing';
 import Pool from './Pool';
+import { loadPool } from '../../actions/pools';
 
 const mapStateToProps = state => ({
   poolId: getPoolId(state),
-  currentWagers: [
-    {
-      id: 0,
-      description: 'The hippies will finish their flags first',
-      amount: 200,
-      wagerWith: [
-        'taylor.wilson@pointless.test'
-      ]
-    },
-    {
-      id: 1,
-      description: 'The gays will be eliminated next',
-      amount: 200,
-      wagerWith: [
-        'taylor.wilson@pointless.test'
-      ]
-    },
-    {
-      id: 2,
-      description: 'The midget girl will go home this episode',
-      amount: 200,
-      wagerWith: [
-        'taylor.wilson@pointless.test'
-      ]
-    },
-    {
-      id: 3,
-      description: 'John will win immunity',
-      amount: 200,
-      wagerWith: [
-        'taylor.wilson@pointless.test'
-      ]
-    },
-    {
-      id: 4,
-      description: 'Kathy will win Survivor',
-      amount: 200,
-      wagerWith: [
-        'taylor.wilson@pointless.test'
-      ]
-    }
-  ]
+  isLoading: getIsLoadingPool(state),
+  pool: getSelectedPool(state)
 });
 
 const mapDispatchToProps = dispatch => ({
+  loadPool: poolId => dispatch(loadPool(poolId)),
   navTo: path => dispatch(navTo(path))
 });
 

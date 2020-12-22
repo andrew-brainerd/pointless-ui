@@ -1,37 +1,67 @@
-import React from 'react';
-import { string, array, func } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { string, bool, object, func } from 'prop-types';
+import { isMobile } from 'react-device-detect';
 import { isEmpty } from 'ramda';
-import { WAGER_ROUTE } from '../../constants/routes';
+import Loading from '../common/Loading/Loading';
+import Modal from '../common/Modal/Modal';
 import styles from './Pool.module.scss';
+import usePrevious from '../../hooks/usePrevious';
 
-const Pool = ({ poolId, currentWagers, navTo }) => {
-  return (
+const Pool = ({ poolId, isLoading, pool, loadPool, navTo }) => {
+  const [selectedWager, setSelectedWager] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const prevPoolId = usePrevious(poolId);
+  const shouldLoadPool = poolId && prevPoolId !== poolId && !isLoading;
+
+  useEffect(() => {
+    shouldLoadPool && loadPool(poolId);
+  }, [shouldLoadPool, loadPool, poolId]);
+
+  !isEmpty(pool) && console.log('Pool', pool);
+
+  return isLoading ? <Loading /> : (
     <div className={styles.pool}>
-      {isEmpty(currentWagers) ? (
-        <div className={styles.noWagers}>
-          No Open Wagers
-        </div>
-      ) : currentWagers.map(wager => {
-        return (
+      <div className={styles.wagerList}>
+        {isEmpty(pool.wagers) ? (
+          <div className={styles.noWagers}>
+            No Open Wagers
+          </div>
+        ) : (pool.wagers || []).map(wager => (
           <div
-            key={wager.id}
+            key={wager._id}
             className={styles.wager}
-            onClick={() => navTo(
-              WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager.id)
-            )}
+            onClick={() => {
+              setSelectedWager(wager);
+              setIsModalOpen(true);
+            }}
           >
             <div className={styles.amount}>{wager.amount}</div>
             <div className={styles.description}>{wager.description}</div>
           </div>
-        );
-      })}
+        ))}
+      </div>
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          isDraggable={!isMobile}
+          closeModal={() => {
+            setIsModalOpen(false);
+          }}>
+          <div className={styles.selectedWager}>
+            <div className={styles.amount}>{selectedWager.amount}</div>
+            <div className={styles.description}>{selectedWager.description}</div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
 
 Pool.propTypes = {
   poolId: string.isRequired,
-  currentWagers: array,
+  isLoading: bool,
+  pool: object,
+  loadPool: func.isRequired,
   navTo: func.isRequired
 };
 
