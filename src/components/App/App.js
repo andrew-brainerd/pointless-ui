@@ -1,5 +1,5 @@
 import React from 'react';
-import { object } from 'prop-types';
+import { object, bool } from 'prop-types';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
@@ -11,7 +11,7 @@ import Notification from '../common/Notification/container';
 // import Attribution from '../Attribution/Attribution';
 import styles from './App.module.scss';
 
-const App = ({ history }) => {
+const App = ({ history, isSubHeaderOpen = true }) => {
   return (
     <div className={styles.app}>
       <Auth0Provider
@@ -23,10 +23,15 @@ const App = ({ history }) => {
         }>
         <ConnectedRouter history={history}>
           <Header />
-          <Switch>
-            <Route path={HOME_ROUTE} exact component={Home} />
-            <Route path={POOL_ROUTE} exact component={Pool} />
-          </Switch>
+          <div className={[
+            styles.content,
+            isSubHeaderOpen ? styles.subHeaderOpen : ''
+          ].join(' ')}>
+            <Switch>
+              <Route path={HOME_ROUTE} exact component={Home} />
+              <Route path={POOL_ROUTE} exact component={Pool} />
+            </Switch>
+          </div>
         </ConnectedRouter>
       </Auth0Provider>
       <Notification />
@@ -36,7 +41,8 @@ const App = ({ history }) => {
 };
 
 App.propTypes = {
-  history: object.isRequired
+  history: object.isRequired,
+  isSubHeaderOpen: bool
 };
 
 export default App;

@@ -5,8 +5,6 @@ import Icon from '../../common/Icon/Icon';
 import styles from './Notification.module.scss';
 
 const Notification = ({ hidden, category, title, message, close }) => {
-  console.log('Notification', { hidden, category, title, message });
-
   return (
     <div
       className={[

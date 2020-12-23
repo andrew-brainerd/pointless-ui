@@ -8,6 +8,14 @@
   overflow-y: auto;
   padding-top: 50px;
 
+  .content {
+    padding-top: 50px 10px;
+
+    &.subHeaderOpen {
+      padding: 100px 0;
+    }
+  }
+
   .attribution {
     bottom: 0;
     font-size: 12px;

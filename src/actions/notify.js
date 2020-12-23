@@ -6,8 +6,7 @@ export const showNotification = (category, title, message) => ({ type: SHOW_NOTI
 export const hideNotification = ({ type: HIDE_NOTIFICATION });
 
 export const displayNotification = (category, title, message, time) => async dispatch => {
-  console.log('Display Notification', { category, title, message, time });
-  const openTime = time || 3000;
+  const openTime = time || 5000;
 
   dispatch(showNotification(category, title, message));
   setTimeout(() => dispatch(hideNotification), openTime);

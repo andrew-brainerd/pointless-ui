@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getCurrentUserEmail } from '../../selectors/user';
 import { getUserPools } from '../../selectors/pools';
-import { loadPools } from '../../actions/pools';
+import { loadPools, createPool } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import Home from './Home';
 
@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadUserPools: userEmail => dispatch(loadPools(userEmail)),
+  loadPools: userEmail => dispatch(loadPools(userEmail)),
+  createPool: (name, createdBy) => dispatch(createPool(name, createdBy)),
   navTo: path => dispatch(navTo(path))
 });
 

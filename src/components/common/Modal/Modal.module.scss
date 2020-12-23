@@ -12,6 +12,7 @@ $modalBackground: #454545;
   outline: none;
   position: relative;
   width: 70%;
+  z-index: 15;
 
   .draggable {
     display: block;
@@ -58,6 +59,7 @@ $modalBackground: #454545;
   .content {
     background: $gray-90;
     border: 5px solid $modalBackground;
+    color: $gray-0;
     height: 100%;
     padding: 10px;
   }

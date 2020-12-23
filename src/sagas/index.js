@@ -1,9 +1,10 @@
 import { all } from 'redux-saga/effects';
-import { userPoolsWatcher, poolWatcher } from './pools';
+import { loadPoolsWatcher, loadPoolWatcher, createPoolWatcher } from './pools';
 
 export default function* rootSaga() {
   yield all([
-    userPoolsWatcher(),
-    poolWatcher()
+    loadPoolsWatcher(),
+    loadPoolWatcher(),
+    createPoolWatcher()
   ]);
 }

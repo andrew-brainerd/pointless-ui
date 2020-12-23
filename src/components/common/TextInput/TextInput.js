@@ -10,6 +10,7 @@ const TextInput = ({
   value = '',
   inputClassName,
   autofocus,
+  isValid = true,
   onChange,
   onPressEnter,
   onFocus,
@@ -28,7 +29,7 @@ const TextInput = ({
 
   const handleKeyPress = ({ key }) => {
     if (key === 'Enter') {
-      if (onPressEnter) {
+      if (isValid && onPressEnter) {
         onPressEnter();
         handleChange({ target: { value: '' } });
       } else {
@@ -71,7 +72,8 @@ TextInput.propTypes = {
   inputClassName: string,
   error: string,
   autofocus: bool,
-  onChange: func,
+  isValid: bool,
+  onChange: func.isRequired,
   onPressEnter: func,
   onFocus: func,
   onBlur: func

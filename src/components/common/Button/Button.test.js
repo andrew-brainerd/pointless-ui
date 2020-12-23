@@ -28,7 +28,16 @@ describe('Button Component', () => {
 
     const className = component.props().className.trim();
 
-    expect(className).toEqual('button disabled animateHover');
+    expect(className).toEqual('button  disabled');
+  });
+
+  it('should add animateHover style', () => {
+    props.animate = true;
+    const component = render();
+
+    const className = component.props().className.trim();
+
+    expect(className).toEqual('button   animateHover');
   });
 
   describe('onClick', () => {
