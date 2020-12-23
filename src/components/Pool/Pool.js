@@ -62,6 +62,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, navTo }) => {
             <Modal
               isOpen={isModalOpen}
               isDraggable={!isMobile}
+              contentHeight={250}
               closeModal={() => {
                 setIsModalOpen(false);
               }}>

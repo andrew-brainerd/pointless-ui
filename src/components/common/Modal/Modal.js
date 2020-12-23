@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func, string, node } from 'prop-types';
+import { bool, number, func, string, node } from 'prop-types';
 import Draggable from 'react-draggable';
 import ReactModal from 'react-modal';
 import Button from '../Button/Button';
@@ -9,6 +9,7 @@ import './Modal.css';
 const Modal = ({
   isOpen,
   isDraggable,
+  contentHeight,
   onOpen,
   closeModal,
   headerText,
@@ -36,7 +37,7 @@ const Modal = ({
               applyTheme={false}
             />
           </div>
-          <div className={styles.content}>
+          <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
             {children}
           </div>
         </div>
@@ -48,6 +49,7 @@ const Modal = ({
 Modal.propTypes = {
   isOpen: bool.isRequired,
   isDraggable: bool,
+  contentHeight: number,
   onOpen: func,
   closeModal: func.isRequired,
   headerText: string,
