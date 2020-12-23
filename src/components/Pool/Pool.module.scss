@@ -1,6 +1,15 @@
 @import '../../styles/colors';
 @import '../../styles/mixins';
 
+.subHeader {
+  justify-content: space-between;
+  width: 100%;
+
+  .poolName {
+    justify-self: flex-start;
+  }
+}
+
 .pool {
   margin-bottom: 50px;
 

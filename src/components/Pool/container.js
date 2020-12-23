@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { getPoolId } from '../../selectors/routing';
 import { getSelectedPool, getIsLoadingPool } from '../../selectors/pools';
+import { loadPool, deletePool } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import Pool from './Pool';
-import { loadPool } from '../../actions/pools';
 
 const mapStateToProps = state => ({
   poolId: getPoolId(state),
@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadPool: poolId => dispatch(loadPool(poolId)),
+  deletePool: poolId => dispatch(deletePool(poolId)),
   navTo: path => dispatch(navTo(path))
 });
 

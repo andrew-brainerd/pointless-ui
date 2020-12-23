@@ -1,11 +1,11 @@
 import React from 'react';
-import { node } from 'prop-types';
+import { string, node } from 'prop-types';
 import styles from './SubHeader.module.scss';
 
-const SubHeader = ({ children }) => {
+const SubHeader = ({ className, children }) => {
   return (
     <div className={styles.subHeader}>
-      <div className={styles.content}>
+      <div className={[styles.content, className || ''].join(' ')}>
         {children}
       </div>
     </div>
@@ -13,6 +13,7 @@ const SubHeader = ({ children }) => {
 };
 
 SubHeader.propTypes = {
+  className: string,
   children: node.isRequired
 };
 

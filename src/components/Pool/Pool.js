@@ -9,7 +9,7 @@ import Modal from '../common/Modal/Modal';
 import Button from '../common/Button/Button';
 import styles from './Pool.module.scss';
 
-const Pool = ({ poolId, isLoading, pool, loadPool, navTo }) => {
+const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, navTo }) => {
   const [selectedWager, setSelectedWager] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const prevPoolId = usePrevious(poolId);
@@ -23,9 +23,18 @@ const Pool = ({ poolId, isLoading, pool, loadPool, navTo }) => {
 
   return (
     <>
-      <SubHeader>
+      <SubHeader className={styles.subHeader}>
+        <div className={styles.poolName}>{pool.name}</div>
         <Button
-
+          type={'hazard'}
+          onClick={() => {
+            if ((pool.wagers || []).length === 0) {
+              deletePool(poolId);
+            } else {
+              console.error('Can\'t delete a pool with wagers');
+            }
+          }}
+          text={'Delete Pool'}
         />
       </SubHeader>
       {isLoading ? <Loading /> : (
@@ -69,10 +78,11 @@ const Pool = ({ poolId, isLoading, pool, loadPool, navTo }) => {
 };
 
 Pool.propTypes = {
-  poolId: string.isRequired,
+  poolId: string,
   isLoading: bool,
   pool: object,
   loadPool: func.isRequired,
+  deletePool: func.isRequired,
   navTo: func.isRequired
 };
 

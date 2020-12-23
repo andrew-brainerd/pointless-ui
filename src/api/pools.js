@@ -24,3 +24,11 @@ export const createPool = async (name, createdBy) => {
 
   return response;
 };
+
+export const deletePool = async poolId => {
+  const response = await client.delete(`/pools/${poolId}`)
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};
