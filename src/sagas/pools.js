@@ -29,7 +29,6 @@ export function* loadPools({ userEmail }) {
 }
 
 export function* loadPool({ poolId }) {
-  console.log('Loading Pool Saga');
   try {
     const response = yield call(api.loadPool, poolId);
     if (response) {

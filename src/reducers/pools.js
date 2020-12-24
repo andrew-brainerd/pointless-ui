@@ -34,6 +34,7 @@ const pools = (state = initialState, action) => {
         isLoadingPool: true
       };
     case POOL_LOADED:
+      console.log('POOL_LOADED', action.pool);
       return {
         ...state,
         isLoadingPool: false,

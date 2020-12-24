@@ -1,0 +1,7 @@
+@import '../../../styles/mixins.scss';
+
+.select {
+  select {
+    @include defaultInput();
+  }
+}
