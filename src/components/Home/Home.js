@@ -30,15 +30,18 @@ const Home = ({ userEmail, userPools, loadPools, createPool, navTo }) => {
               onChange={setNewPoolName}
               onPressEnter={() => {
                 createPool(newPoolName, userEmail);
+                setNewPoolName('');
                 setIsCreatingNewPool(false);
               }}
               isValid={!!newPoolName}
+              autofocus
             />
             <Button
               className={styles.newPoolButton}
               type={'primary'}
               onClick={() => {
                 createPool(newPoolName, userEmail);
+                setNewPoolName('');
                 setIsCreatingNewPool(false);
               }}
               text={'Create'}
@@ -47,6 +50,7 @@ const Home = ({ userEmail, userPools, loadPools, createPool, navTo }) => {
             <Button
               className={styles.cancelNewPoolButton}
               onClick={() => {
+                setNewPoolName('');
                 setIsCreatingNewPool(false);
               }}
               text={'Cancel'}

@@ -1,16 +1,20 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as api from '../api/pools';
-import { HOME_ROUTE } from '../constants/routes';
+import { HOME_ROUTE, POOL_ROUTE } from '../constants/routes';
 import { navTo } from '../actions/routing';
 import {
   poolsLoaded,
   poolLoaded,
   poolCreated,
   poolDeleted,
+  wagerCreated,
+  wagerDeleted,
   LOAD_POOLS,
   LOAD_POOL,
   CREATE_POOL,
-  DELETE_POOL
+  DELETE_POOL,
+  CREATE_WAGER,
+  DELETE_WAGER
 } from '../actions/pools';
 
 export function* loadPools({ userEmail }) {
@@ -25,6 +29,7 @@ export function* loadPools({ userEmail }) {
 }
 
 export function* loadPool({ poolId }) {
+  console.log('Loading Pool Saga');
   try {
     const response = yield call(api.loadPool, poolId);
     if (response) {
@@ -40,6 +45,7 @@ export function* createPool({ name, createdBy }) {
     const response = yield call(api.createPool, name, createdBy);
     if (response) {
       yield put(poolCreated(response));
+      yield loadPools({ userEmail: createdBy });
     }
   } catch (err) {
     console.error(err);
@@ -52,6 +58,30 @@ export function* deletePool({ poolId }) {
     if (response) {
       yield put(poolDeleted(response));
       yield put(navTo(HOME_ROUTE));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function* createWager({ poolId, wager }) {
+  try {
+    const response = yield call(api.createWager, poolId, wager);
+    if (response) {
+      yield put(wagerCreated(response));
+      yield put(navTo(POOL_ROUTE.replace(':poolId', poolId)));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function* deleteWager({ poolId, wagerId }) {
+  try {
+    const response = yield call(api.deleteWager, poolId, wagerId);
+    if (response) {
+      yield put(wagerDeleted(response));
+      yield loadPool({ poolId });
     }
   } catch (err) {
     console.error(err);
@@ -74,3 +104,10 @@ export function* deletePoolWatcher() {
   yield takeLatest(DELETE_POOL, deletePool);
 }
 
+export function* createWagerWatcher() {
+  yield takeLatest(CREATE_WAGER, createWager);
+}
+
+export function* deleteWagerWatcher() {
+  yield takeLatest(DELETE_WAGER, deleteWager);
+}

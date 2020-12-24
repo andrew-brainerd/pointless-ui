@@ -3,7 +3,9 @@ import {
   loadPoolsWatcher,
   loadPoolWatcher,
   createPoolWatcher,
-  deletePoolWatcher
+  deletePoolWatcher,
+  createWagerWatcher,
+  deleteWagerWatcher
 } from './pools';
 
 export default function* rootSaga() {
@@ -11,6 +13,8 @@ export default function* rootSaga() {
     loadPoolsWatcher(),
     loadPoolWatcher(),
     createPoolWatcher(),
-    deletePoolWatcher()
+    deletePoolWatcher(),
+    createWagerWatcher(),
+    deleteWagerWatcher()
   ]);
 }

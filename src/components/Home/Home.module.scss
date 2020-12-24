@@ -41,3 +41,13 @@
     }
   }
 }
+
+@media screen and (max-width: $appMinWidth) {
+  .poolControls {
+    .newPoolName {
+      .newPoolNameInput {
+        width: 90%;
+      }
+    }
+  }
+}

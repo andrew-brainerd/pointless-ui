@@ -7,14 +7,16 @@ import styles from './Modal.module.scss';
 import './Modal.css';
 
 const Modal = ({
+  className,
+  contentClassName,
   isOpen,
   isDraggable,
+  showHeader = true,
   contentHeight,
   onOpen,
   closeModal,
   headerText,
-  children,
-  className
+  children
 }) => {
   return (
     <ReactModal
@@ -28,16 +30,23 @@ const Modal = ({
     >
       <Draggable disabled={!isDraggable}>
         <div className={styles.draggable}>
-          <div className={styles.header}>
-            <div className={styles.headerText}>{headerText}</div>
-            <Button
-              className={styles.closeButton}
-              text={'X'}
-              onClick={closeModal}
-              applyTheme={false}
-            />
-          </div>
-          <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
+          {showHeader && (
+            <div className={styles.header}>
+              <div className={styles.headerText}>{headerText}</div>
+              <Button
+                className={styles.closeButton}
+                text={'X'}
+                onClick={closeModal}
+                applyTheme={false}
+              />
+            </div>
+          )}
+          <div
+            className={[
+              styles.content,
+              contentClassName || ''
+            ].join(' ')}
+            style={{ height: contentHeight || 'auto' }}>
             {children}
           </div>
         </div>
@@ -47,14 +56,16 @@ const Modal = ({
 };
 
 Modal.propTypes = {
+  className: string,
+  contentClassName: string,
   isOpen: bool.isRequired,
   isDraggable: bool,
+  showHeader: bool,
   contentHeight: number,
   onOpen: func,
   closeModal: func.isRequired,
   headerText: string,
-  children: node,
-  className: string
+  children: node
 };
 
 Modal.defaultProps = {

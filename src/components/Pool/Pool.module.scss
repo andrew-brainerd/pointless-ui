@@ -1,5 +1,12 @@
 @import '../../styles/colors';
 @import '../../styles/mixins';
+@import '../../styles/sizing';
+
+.buttonContainer {
+  > * {
+    margin-left: 10px;
+  }
+}
 
 .subHeader {
   justify-content: space-between;
@@ -39,9 +46,35 @@
       }
     }
   }
+}
 
-  .selectedWager {
+/* Modal Styles */
+.modal {
+  .modalContent {
     display: flex;
-    position: absolute;
+    position: relative;
+
+    .selectedWager {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+    }
+
+    .buttonContainer {
+      align-self: flex-end;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $appMinWidth) {
+  .pool {
+    margin-bottom: 50px;
+
+    .wagerList {
+      margin: 0 auto 75px auto;
+    }
   }
 }

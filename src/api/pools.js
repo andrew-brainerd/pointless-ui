@@ -32,3 +32,19 @@ export const deletePool = async poolId => {
 
   return response;
 };
+
+export const createWager = async (poolId, wager) => {
+  const response = await client.post(`/pools/${poolId}/wagers`, wager)
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};
+
+export const deleteWager = async (poolId, wagerId) => {
+  const response = await client.delete(`/pools/${poolId}/wagers/${wagerId}`)
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};

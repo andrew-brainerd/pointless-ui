@@ -6,7 +6,7 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ userEmail, connectClient, setCurrentUser, notify, loadPools, navTo }) => {
+const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, loadPool, navTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, isLoading, user } = useAuth0();
   const menuRef = useRef();
@@ -18,13 +18,10 @@ const Header = ({ userEmail, connectClient, setCurrentUser, notify, loadPools, n
   useEffect(() => {
     userEmail && connectClient(
       userEmail,
-      'poolCreated',
-      data => {
-        notify(data.category, data.title, data.message);
-        loadPools(userEmail);
-      }
+      'notify',
+      data => notify(data.category, data.title, data.message)
     );
-  }, [userEmail, connectClient, notify, loadPools]);
+  }, [userEmail, connectClient, notify, loadPool, poolId]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
@@ -75,10 +72,11 @@ const Header = ({ userEmail, connectClient, setCurrentUser, notify, loadPools, n
 
 Header.propTypes = {
   userEmail: string,
+  poolId: string,
   connectClient: func.isRequired,
   setCurrentUser: func.isRequired,
   notify: func.isRequired,
-  loadPools: func.isRequired,
+  loadPool: func.isRequired,
   navTo: func.isRequired
 };
 
