@@ -52,7 +52,10 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navT
             ) : (pool.wagers || []).map(wager => (
               <div
                 key={wager._id}
-                className={styles.wager}
+                className={[
+                  styles.wager,
+                  !wager.isActive ? styles.inactive : ''
+                ].join(' ')}
                 onClick={() => {
                   setSelectedWager(wager);
                   setIsModalOpen(true);

@@ -21,10 +21,11 @@
     "no-extra-boolean-cast": "off",
     "generator-star-spacing": "off",
     "yield-star-spacing": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "multiline-ternary": "off"
   },
   "settings": {
-    "react": {
+  "react": {
       "pragma": "React",
       "version": "16.9.0"
     }

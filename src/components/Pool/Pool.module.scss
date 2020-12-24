@@ -35,6 +35,11 @@
       flex-direction: column;
       padding: 15px 10px;
 
+      &.inactive {
+        border: 2px dashed;
+        opacity: 0.6;
+      }
+
       .amount {
         font-size: 32px;
         font-weight: bold;
