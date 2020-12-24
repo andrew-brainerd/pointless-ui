@@ -7,8 +7,8 @@ import {
 } from '../actions/pools';
 
 export const initialState = {
-  isLoadingPools: false,
-  isLoadingPool: false,
+  isLoadingPools: true,
+  isLoadingPool: true,
   userPools: [],
   selectedPool: {}
 };
@@ -18,7 +18,7 @@ const pools = (state = initialState, action) => {
     case LOAD_POOLS:
       return {
         ...state,
-        isLoadingPools: false,
+        isLoadingPools: true,
         userPools: []
       };
     case POOLS_LOADED:

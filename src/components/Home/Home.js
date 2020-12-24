@@ -9,14 +9,14 @@ import TextInput from '../common/TextInput/TextInput';
 import Loading from '../common/Loading/Loading';
 import styles from './Home.module.scss';
 
-const Home = ({ userEmail, userPools, loadPools, createPool, navTo }) => {
+const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo }) => {
   const [isCreatingNewPool, setIsCreatingNewPool] = useState(false);
   const [newPoolName, setNewPoolName] = useState('');
-  const { isLoading } = useAuth0();
+  const { isLoading: isLoadingUser } = useAuth0();
 
   useEffect(() => {
-    !isLoading && userEmail && loadPools(userEmail);
-  }, [isLoading, userEmail, loadPools]);
+    userEmail && loadPools(userEmail);
+  }, [userEmail, loadPools]);
 
   return (
     <>
@@ -65,7 +65,7 @@ const Home = ({ userEmail, userPools, loadPools, createPool, navTo }) => {
           />
         )}
       </SubHeader>
-      {isLoading ? <Loading /> : (
+      {(isLoading || isLoadingUser) ? <Loading /> : (
         <div className={[styles.home, isMobile ? styles.mobile : ''].join(' ')}>
           <div className={styles.pageHeader}>
             <div className={styles.myPools}>
@@ -89,6 +89,7 @@ const Home = ({ userEmail, userPools, loadPools, createPool, navTo }) => {
 };
 
 Home.propTypes = {
+  isLoading: bool,
   isLoadingUser: bool,
   userEmail: string,
   userPools: array,

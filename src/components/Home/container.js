@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import { getCurrentUserEmail } from '../../selectors/user';
-import { getUserPools } from '../../selectors/pools';
+import { getIsLoadingPools, getUserPools } from '../../selectors/pools';
 import { loadPools, createPool } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import Home from './Home';
 
 const mapStateToProps = state => ({
+  isLoading: getIsLoadingPools(state),
   userEmail: getCurrentUserEmail(state),
   userPools: getUserPools(state)
 });
