@@ -1,11 +1,16 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import loadingImage from '../../../img/loading.png';
+import Lottie from 'lottie-react-web';
+import spinner from './loading.json';
 import styles from './Loading.module.scss';
 
 const Loading = ({ isActive = true, className }) => isActive ? (
   <div className={[styles.loading, className].join(' ')}>
-    <img src={loadingImage} alt='Loading' />
+    <Lottie
+      options={{
+        animationData: spinner
+      }}
+    />
   </div>
 ) : null;
 

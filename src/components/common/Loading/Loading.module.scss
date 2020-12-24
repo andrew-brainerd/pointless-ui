@@ -1,7 +1,9 @@
 .loading {
   display: flex;
   justify-content: center;
+  margin: 20px auto;
   position: relative;
+  width: 250px;
   z-index: 10;
 
   img {
