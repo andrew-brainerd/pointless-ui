@@ -1,10 +1,12 @@
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions/notify';
+import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, LOAD_NOTIFICATIONS, NOTIFICATIONS_LOADED } from '../actions/notify';
 
 const initialState = {
   hidden: true,
   category: 'default',
   title: 'New Notification',
-  message: 'The platypus is only found in eastern Australia in small rivers and streams within the states of Queensland, New South Wales, Victoria and Tasmania.'
+  message: 'The platypus is only found in eastern Australia in small rivers and streams within the states of Queensland, New South Wales, Victoria and Tasmania.',
+  isLoadingNotifications: true,
+  notifications: []
 };
 
 export default function notify (state = initialState, action) {
@@ -21,6 +23,17 @@ export default function notify (state = initialState, action) {
       return {
         ...state,
         hidden: true
+      };
+    case LOAD_NOTIFICATIONS:
+      return {
+        ...state,
+        isLoadingNotifications: true
+      };
+    case NOTIFICATIONS_LOADED:
+      return {
+        ...state,
+        isLoadingNotifications: false,
+        notifications: action.notifications
       };
     default:
       return state;

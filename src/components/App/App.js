@@ -3,11 +3,17 @@ import { object, bool } from 'prop-types';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
-import { HOME_ROUTE, POOL_ROUTE, NEW_WAGER_ROUTE } from '../../constants/routes';
+import {
+  HOME_ROUTE,
+  POOL_ROUTE,
+  NEW_WAGER_ROUTE,
+  NOTIFICATIONS_ROUTE
+} from '../../constants/routes';
 import Home from '../Home/container';
 import Header from '../Header/container';
 import Pool from '../Pool/container';
 import NewWager from '../NewWager/container';
+import Notifications from '../Notifications/container';
 import Notification from '../common/Notification/container';
 // import Attribution from '../Attribution/Attribution';
 import styles from './App.module.scss';
@@ -32,6 +38,7 @@ const App = ({ history, isSubHeaderOpen = true }) => {
               <Route path={HOME_ROUTE} exact component={Home} />
               <Route path={POOL_ROUTE} exact component={Pool} />
               <Route path={NEW_WAGER_ROUTE} exact component={NewWager} />
+              <Route path={NOTIFICATIONS_ROUTE} exact component={Notifications} />
             </Switch>
           </div>
         </ConnectedRouter>

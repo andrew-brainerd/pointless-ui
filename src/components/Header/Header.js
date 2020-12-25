@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { string, func } from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
-import { HOME_ROUTE } from '../../constants/routes';
+import { HOME_ROUTE, NOTIFICATIONS_ROUTE } from '../../constants/routes';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
@@ -16,11 +16,18 @@ const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, load
   }, [user, setCurrentUser]);
 
   useEffect(() => {
-    userEmail && connectClient(
-      userEmail,
-      'notify',
-      data => notify(data.category, data.title, data.message)
-    );
+    if (userEmail) {
+      connectClient(
+        userEmail,
+        'push',
+        data => notify(data.category, data.title, data.message)
+      );
+      connectClient(
+        userEmail,
+        'notify',
+        data => console.log('Notification Added', data)
+      );
+    }
   }, [userEmail, connectClient, notify, loadPool, poolId]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
@@ -36,6 +43,12 @@ const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, load
           |||
         </div>
         <div className={styles.player}>{userEmail}</div>
+        <div className={styles.buttonContainer}>
+          <Button
+            text={'Notifications'}
+            onClick={() => navTo(NOTIFICATIONS_ROUTE.replace(':userEmail', userEmail))}
+          />
+        </div>
       </div>
       {isMenuOpen &&
         <div className={styles.headerMenu} ref={menuRef}>

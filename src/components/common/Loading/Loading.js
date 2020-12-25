@@ -1,12 +1,13 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
+import { string } from 'prop-types';
 import Lottie from 'lottie-react-web';
 import spinner from './loading.json';
 import styles from './Loading.module.scss';
 
-const Loading = ({ className }) => {
+const Loading = ({ className, message }) => {
   return (
     <div className={[styles.loading, className].join(' ')}>
+      {message && <div className={styles.message}>{message}</div>}
       <Lottie
         options={{
           animationData: spinner,
@@ -19,8 +20,8 @@ const Loading = ({ className }) => {
 };
 
 Loading.propTypes = {
-  isActive: bool,
-  className: string
+  className: string,
+  message: string
 };
 
 export default Loading;

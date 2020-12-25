@@ -37,6 +37,14 @@
     margin-right: 25px;
     white-space: nowrap;
   }
+
+  .buttonContainer {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
+    width: 75%;
+  }
 }
 
 .headerMenu {
