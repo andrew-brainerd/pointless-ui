@@ -12,6 +12,8 @@ export const CREATE_WAGER = `${PREFIX}/CREATE_WAGER`;
 export const WAGER_CREATED = `${PREFIX}/WAGER_CREATED`;
 export const DELETE_WAGER = `${PREFIX}/DELETE_WAGER`;
 export const WAGER_DELETED = `${PREFIX}/WAGER_DELETED`;
+export const INVITE_USER = `${PREFIX}/INVITE_USER`;
+export const ADD_USER = `${PREFIX}/ADD_USER`;
 
 export const loadPools = userEmail => ({ type: LOAD_POOLS, userEmail });
 export const poolsLoaded = pools => ({ type: POOLS_LOADED, pools });
@@ -25,3 +27,5 @@ export const createWager = (poolId, createdBy, wager) => ({ type: CREATE_WAGER, 
 export const wagerCreated = wager => ({ type: WAGER_CREATED, wager });
 export const deleteWager = (poolId, wagerId) => ({ type: DELETE_WAGER, poolId, wagerId });
 export const wagerDeleted = wager => ({ type: WAGER_DELETED, wager });
+export const inviteUser = inviteEmail => ({ type: INVITE_USER, inviteEmail });
+export const addUser = (poolId, userEmail) => ({ type: ADD_USER, poolId, userEmail });

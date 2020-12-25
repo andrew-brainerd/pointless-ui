@@ -9,12 +9,19 @@ import Loading from '../common/Loading/Loading';
 import Modal from '../common/Modal/Modal';
 import Button from '../common/Button/Button';
 import styles from './Pool.module.scss';
+import TextInput from '../common/TextInput/TextInput';
 
-const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navTo }) => {
+const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, inviteUser, addUser, navTo }) => {
   const [selectedWager, setSelectedWager] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWagerModalOpen, setIsWagerModalOpen] = useState(false);
+  const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
+  const [isInvitingUser, setIsInvitingUser] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
   const prevPoolId = usePrevious(poolId);
-  const shouldLoadPool = poolId && prevPoolId !== poolId && !isLoading;
+  const shouldLoadPool = poolId && prevPoolId !== poolId;
+  const hasSingleUser = (pool.users || []).length === 1;
+
+  console.log('Pool', pool);
 
   useEffect(() => {
     shouldLoadPool && loadPool(poolId);
@@ -26,8 +33,15 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navT
         <div className={styles.poolName}>{pool.name}</div>
         <div className={styles.buttonContainer}>
           <Button
+            onClick={() => setIsUsersModalOpen(true)}
+            text={'Users'}
+            title={'View Users'}
+          />
+          <Button
             onClick={() => navTo(NEW_WAGER_ROUTE.replace(':poolId', poolId))}
             text={'New Wager'}
+            title={hasSingleUser ? 'Add users to unlock wagers' : 'New Wager'}
+            disabled={hasSingleUser}
           />
           <Button
             type={'hazard'}
@@ -58,7 +72,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navT
                 ].join(' ')}
                 onClick={() => {
                   setSelectedWager(wager);
-                  setIsModalOpen(true);
+                  setIsWagerModalOpen(true);
                 }}
               >
                 <div className={styles.amount}>{wager.amount} pts.</div>
@@ -66,16 +80,16 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navT
               </div>
             ))}
           </div>
-          {isModalOpen && (
+          {isWagerModalOpen && (
             <Modal
               className={styles.modal}
               contentClassName={styles.modalContent}
-              isOpen={isModalOpen}
+              isOpen={isWagerModalOpen}
               isDraggable={!isMobile}
               showHeader={false}
               contentHeight={250}
               closeModal={() => {
-                setIsModalOpen(false);
+                setIsWagerModalOpen(false);
               }}
             >
               <div className={styles.selectedWager}>
@@ -87,13 +101,65 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, navT
                   type={'hazard'}
                   onClick={() => {
                     deleteWager(poolId, selectedWager._id);
-                    setIsModalOpen(false);
+                    setIsWagerModalOpen(false);
                   }}
                   text={'Cancel Wager'}
                 />
                 <Button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setIsWagerModalOpen(false)}
                   text={'Close'}
+                />
+              </div>
+            </Modal>
+          )}
+          {isUsersModalOpen && (
+            <Modal
+              className={styles.modal}
+              contentClassName={styles.modalContent}
+              isOpen={isUsersModalOpen}
+              isDraggable={!isMobile}
+              headerText={'Users in Pool'}
+              contentHeight={250}
+              closeModal={() => {
+                setIsUsersModalOpen(false);
+              }}
+            >
+              {isInvitingUser ? (
+                <div className={styles.inviteUser}>
+                  <TextInput
+                    value={inviteEmail}
+                    onChange={setInviteEmail}
+                  />
+                </div>
+              ) : (
+                <div className={styles.currentUsers}>
+                  {pool.users.map((email, e) => (
+                    <div key={e} className={styles.user}>
+                      {email}
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className={styles.buttonContainer}>
+                <Button
+                  type={isInvitingUser ? 'hazard' : 'primary'}
+                  onClick={() => {
+                    setIsInvitingUser(!isInvitingUser);
+                  }}
+                  text={isInvitingUser ? 'Cancel' : 'Invite User'}
+                />
+                <Button
+                  type={isInvitingUser ? 'primary' : 'default'}
+                  onClick={() => {
+                    if (isInvitingUser) {
+                      addUser(poolId, inviteEmail);
+                    } else {
+                      setIsUsersModalOpen(false);
+                    }
+                    setIsInvitingUser(false);
+                  }}
+                  text={isInvitingUser ? 'Invite' : 'Close'}
+                  disabled={isInvitingUser ? inviteEmail === '' : false}
                 />
               </div>
             </Modal>
@@ -111,6 +177,8 @@ Pool.propTypes = {
   loadPool: func.isRequired,
   deletePool: func.isRequired,
   deleteWager: func.isRequired,
+  inviteUser: func.isRequired,
+  addUser: func.isRequired,
   navTo: func.isRequired
 };
 

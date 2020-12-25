@@ -24,7 +24,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
   }, [poolUsers, poolId, loadPool]);
 
   const remainingUsers = (poolUsers || []).filter(poolUser => {
-    return !wager.users.includes(poolUser);
+    return !wager.users.includes(poolUser) && poolUser !== userEmail;
   }).map(user => ({ value: user, label: user }));
 
   const isWagerInValid = () => wager.amount <= 0 || wager.description === '' || isEmpty(wager.users);
@@ -67,6 +67,15 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
             });
           }}
         />
+        <div className={styles.selectedUsers}>
+          {wager.users.filter(email => email !== userEmail).map((email, u) => {
+            return (
+              <div key={u} className={styles.selectedUser}>
+                {email}
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className={styles.buttonContainer}>
         <Button

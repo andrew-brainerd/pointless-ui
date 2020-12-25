@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getPoolId } from '../../selectors/routing';
 import { getSelectedPool, getIsLoadingPool } from '../../selectors/pools';
-import { loadPool, deletePool, deleteWager } from '../../actions/pools';
+import { loadPool, deletePool, deleteWager, inviteUser, addUser } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import Pool from './Pool';
 
@@ -15,6 +15,8 @@ const mapDispatchToProps = dispatch => ({
   loadPool: poolId => dispatch(loadPool(poolId)),
   deletePool: poolId => dispatch(deletePool(poolId)),
   deleteWager: (poolId, wagerId) => dispatch(deleteWager(poolId, wagerId)),
+  inviteUser: inviteEmail => dispatch(inviteUser(inviteEmail)),
+  addUser: (poolId, userEmail) => dispatch(addUser(poolId, userEmail)),
   navTo: path => dispatch(navTo(path))
 });
 

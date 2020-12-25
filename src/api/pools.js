@@ -48,3 +48,11 @@ export const deleteWager = async (poolId, wagerId) => {
 
   return response;
 };
+
+export const addUser = async (poolId, userEmail) => {
+  const response = await client.post(`/pools/${poolId}/users`, { userEmail })
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};

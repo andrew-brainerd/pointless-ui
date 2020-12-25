@@ -3,5 +3,7 @@
 .select {
   select {
     @include defaultInput();
+
+    font-size: 16px;
   }
 }

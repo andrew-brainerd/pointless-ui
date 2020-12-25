@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 import noop from '../../../utils/noop';
 import styles from './Button.module.scss';
 
-const Button = ({ animate = false, children, className, disabled, name, onClick, text, type }) => (
+const Button = ({ animate = false, children, className, disabled, name, onClick, text, title, type }) => (
   <div
     name={name}
     className={[
@@ -15,6 +15,7 @@ const Button = ({ animate = false, children, className, disabled, name, onClick,
       className
     ].join(' ')}
     onClick={!disabled ? onClick : noop}
+    title={title}
   >
     {children || text}
   </div>
@@ -28,6 +29,7 @@ Button.propTypes = {
   name: string,
   onClick: func.isRequired,
   text: oneOfType([string, number]),
+  title: string,
   type: string
 };
 
