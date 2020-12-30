@@ -1,5 +1,5 @@
-import { SET_CURRENT_USER } from '../actions/user';
-import reducer, { initialState as defaultState } from './user';
+import { SET_CURRENT_USER } from '../actions/users';
+import reducer, { initialState as defaultState } from './users';
 
 describe('User Reducer', () => {
   it('should return the default state', () => {

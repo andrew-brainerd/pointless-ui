@@ -1,8 +1,8 @@
 import { prop } from 'ramda';
 import { client } from './tools';
 
-export const createUser = async (name, email, username) => {
-  const response = await client.post('/users', { name, email, username });
+export const createUser = async user => {
+  const response = await client.post('/users', { user });
 
   return prop('data', response);
 };

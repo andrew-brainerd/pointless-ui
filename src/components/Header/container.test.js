@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { LOADING_USER, SET_CURRENT_USER } from '../../actions/user';
+import { LOADING_USER } from '../../actions/users';
 import Container from './container';
 import Header from './Header';
 
@@ -54,8 +54,7 @@ describe('Header Container', () => {
     component.props().setCurrentUser('test@anorakgm.com');
 
     expect(store.getActions()).toEqual([
-      { type: LOADING_USER },
-      { type: SET_CURRENT_USER, user: 'test@anorakgm.com' }
+      { type: LOADING_USER }
     ]);
   });
 });

@@ -21,8 +21,6 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
   const shouldLoadPool = poolId && prevPoolId !== poolId;
   const hasSingleUser = (pool.users || []).length === 1;
 
-  // console.log('Pool', pool);
-
   useEffect(() => {
     shouldLoadPool && loadPool(poolId);
   }, [shouldLoadPool, loadPool, poolId]);

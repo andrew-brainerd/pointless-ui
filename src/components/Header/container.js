@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getCurrentUserEmail } from '../../selectors/user';
 import { getPoolId } from '../../selectors/routing';
 import { connectClient } from '../../actions/pusher';
-import { setCurrentUser } from '../../actions/user';
+import { setCurrentUser } from '../../actions/users';
 import { loadPool } from '../../actions/pools';
 import { displayNotification } from '../../actions/notify';
 import { navTo } from '../../actions/routing';

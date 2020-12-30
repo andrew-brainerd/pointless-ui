@@ -9,8 +9,6 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications 
     userEmail && loadNotifications(userEmail);
   }, [userEmail, loadNotifications]);
 
-  console.log('Notifications', notifications);
-
   return isLoading ? <Loading message='Loading Notifications' /> : (
     <div className={styles.notifications}>
       {notifications.map(notification => (

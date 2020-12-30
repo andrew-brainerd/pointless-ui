@@ -1,4 +1,4 @@
-import { LOADING_USER, SET_CURRENT_USER, CHECKING_USERNAME, USERNAME_CHECKED } from '../actions/user';
+import { LOADING_USER, SET_CURRENT_USER, CHECKING_USERNAME, USERNAME_CHECKED } from '../actions/users';
 
 export const initialState = {
   isLoadingUser: false,

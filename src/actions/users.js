@@ -1,7 +1,4 @@
 import * as usersApi from '../api/users';
-import { navTo } from './routing';
-import { HOME_ROUTE } from '../constants/routes';
-import { getCurrentUser } from '../selectors/user';
 
 const PREFIX = 'USERS';
 
@@ -24,7 +21,14 @@ export const creatingUser = { type: CREATING_USER };
 
 export const setCurrentUser = user => async dispatch => {
   dispatch(loadingUser);
-  dispatch({ type: SET_CURRENT_USER, user });
+  usersApi.getUserByEmail(user.email)
+    .then(({ doesNotExist, ...userData }) => {
+      if (doesNotExist) {
+        dispatch(createUser(user));
+      }
+      dispatch({ type: SET_CURRENT_USER, user: { ...user, ...userData } });
+    })
+    .catch(err => dispatch(loadingUserFailed(err)));
 };
 
 export const checkUsername = username => async dispatch => {
@@ -41,12 +45,9 @@ export const checkUsername = username => async dispatch => {
     .catch(err => dispatch(loadingUserFailed(err)));
 };
 
-export const createUser = username => async (dispatch, getState) => {
-  const currentUser = getCurrentUser(getState());
-
+export const createUser = user => async (dispatch, getState) => {
   dispatch(creatingUser);
-  usersApi.createUser(currentUser.name, currentUser.email, username).then(user => {
-    dispatch({ type: SET_CURRENT_USER, user: { ...currentUser, ...user } });
-    dispatch(navTo(HOME_ROUTE));
+  usersApi.createUser(user).then(newUser => {
+    dispatch({ type: SET_CURRENT_USER, user: { ...newUser, ...user } });
   });
 };
