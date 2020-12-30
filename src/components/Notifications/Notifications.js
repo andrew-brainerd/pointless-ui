@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { bool, string, array, func } from 'prop-types';
-import moment from 'moment';
+import getRelativeDate from '../../utils/getRelativeDate';
 import Loading from '../common/Loading/Loading';
 import styles from './Notifications.module.scss';
 
@@ -18,7 +18,7 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications 
           <div className={styles.title}>{notification.title}</div>
           <div className={styles.message}>{notification.message}</div>
           <div className={styles.timestamp}>
-            {moment(notification.timestamp).format('MM-DD-YYYY hh:mm A')}
+            {getRelativeDate(notification.timestamp)}
           </div>
         </div>
       ))}
