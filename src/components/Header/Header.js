@@ -43,15 +43,12 @@ const Header = ({
   }, [userEmail, connectClient, notify, loadPool, poolId]);
 
   useEffect(() => {
-    console.log('Pathname', pathname);
     if (pathname === '/notifications') {
-      console.log('Hiding sub header');
       hideSubHeader();
     } else {
-      console.log('Showing sub header');
       showSubHeader();
     }
-  }, [pathname]);
+  }, [pathname, hideSubHeader, showSubHeader]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 

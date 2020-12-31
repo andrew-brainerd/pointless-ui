@@ -19,8 +19,6 @@ import Notification from '../common/Notification/container';
 import styles from './App.module.scss';
 
 const App = ({ history, isSubHeaderOpen }) => {
-  console.log('App Sub Header', isSubHeaderOpen);
-
   return (
     <div className={styles.app}>
       <Auth0Provider
