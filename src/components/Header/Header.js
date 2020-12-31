@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { HOME_ROUTE, NOTIFICATIONS_ROUTE } from '../../constants/routes';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../common/Button/Button';
+import Icon from '../common/Icon/Icon';
 import styles from './Header.module.scss';
 
 const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, loadPool, navTo }) => {
@@ -47,7 +48,9 @@ const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, load
           <Button
             text={'Notifications'}
             onClick={() => navTo(NOTIFICATIONS_ROUTE.replace(':userEmail', userEmail))}
-          />
+          >
+            <Icon name={'bell'} title={'Notifications'} />
+          </Button>
         </div>
       </div>
       {isMenuOpen &&

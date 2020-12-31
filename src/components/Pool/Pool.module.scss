@@ -3,7 +3,12 @@
 @import '../../styles/sizing';
 
 .buttonContainer {
-  > * {
+  align-items: center;
+  display: flex;
+
+  > div {
+    align-items: center;
+    display: flex;
     margin-left: 10px;
   }
 }

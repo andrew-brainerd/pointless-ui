@@ -8,6 +8,7 @@ import SubHeader from '../common/SubHeader/SubHeader';
 import Loading from '../common/Loading/Loading';
 import Modal from '../common/Modal/Modal';
 import Button from '../common/Button/Button';
+import Icon from '../common/Icon/Icon';
 import styles from './Pool.module.scss';
 import TextInput from '../common/TextInput/TextInput';
 
@@ -31,17 +32,24 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
         <div className={styles.poolName}>{pool.name}</div>
         <div className={styles.buttonContainer}>
           <Button
+            className={styles.usersButton}
             onClick={() => setIsUsersModalOpen(true)}
             text={'Users'}
             title={'View Users'}
-          />
+          >
+            <Icon name={'group'} title={'Pool Members'} />
+          </Button>
           <Button
+            className={styles.newWagerButton}
             onClick={() => navTo(NEW_WAGER_ROUTE.replace(':poolId', poolId))}
             text={'New Wager'}
             title={hasSingleUser ? 'Add users to unlock wagers' : 'New Wager'}
             disabled={hasSingleUser}
-          />
+          >
+            <Icon name={'plus'} title={'New Wager'} />
+          </Button>
           <Button
+            className={styles.deleteButton}
             type={'hazard'}
             onClick={() => {
               if ((pool.wagers || []).length === 0) {
@@ -51,7 +59,9 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
               }
             }}
             text={'Delete Pool'}
-          />
+          >
+            <Icon name={'trash'} title={'Delete Pool'} />
+          </Button>
         </div>
       </SubHeader>
       {isLoading ? <Loading /> : (

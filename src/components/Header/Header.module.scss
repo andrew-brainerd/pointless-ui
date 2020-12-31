@@ -44,6 +44,12 @@
     justify-content: flex-end;
     padding-right: 25px;
     width: 100%;
+
+    > div {
+      align-items: center;
+      display: flex;
+      margin-left: 10px;
+    }
   }
 }
 

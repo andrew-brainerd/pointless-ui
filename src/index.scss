@@ -29,6 +29,12 @@ code {
     monospace;
 }
 
+svg {
+  fill: $gray-0;
+  height: 30px;
+  width: 30px;
+}
+
 #root {
   margin: 0 auto;
   height: 100vh;

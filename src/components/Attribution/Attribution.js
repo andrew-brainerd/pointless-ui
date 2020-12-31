@@ -9,6 +9,14 @@ const iconCreators = [
   {
     authorName: 'Smashicons',
     authorLink: 'https://www.flaticon.com/authors/smashicons'
+  },
+  {
+    authorName: 'bqlqn',
+    authorLink: 'https://www.flaticon.com/authors/bqlqn'
+  },
+  {
+    authorName: 'Dave Gandy',
+    authorLink: 'https://www.flaticon.com/authors/dave-gandy'
   }
 ];
 
