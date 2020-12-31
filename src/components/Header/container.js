@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getCurrentUserEmail } from '../../selectors/user';
+import { getCurrentUserEmail, getCurrentUserPicture } from '../../selectors/user';
 import { getPoolId, getPathname } from '../../selectors/routing';
 import { connectClient } from '../../actions/pusher';
 import { setCurrentUser } from '../../actions/users';
@@ -11,6 +11,7 @@ import Header from './Header';
 
 const mapStateToProps = state => ({
   userEmail: getCurrentUserEmail(state),
+  userPicture: getCurrentUserPicture(state),
   poolId: getPoolId(state),
   pathname: getPathname(state)
 });

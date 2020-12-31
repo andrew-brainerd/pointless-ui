@@ -9,6 +9,7 @@ import styles from './Header.module.scss';
 
 const Header = ({
   userEmail,
+  userPicture,
   poolId,
   pathname,
   connectClient,
@@ -62,7 +63,11 @@ const Header = ({
         >
           |||
         </div>
-        <div className={styles.player}>{userEmail}</div>
+        {userPicture && (
+          <div className={styles.user}>
+            <img src={userPicture} alt='User Profile' />
+          </div>
+        )}
         <div className={styles.buttonContainer}>
           <Button
             text={'Notifications'}
@@ -107,6 +112,7 @@ const Header = ({
 
 Header.propTypes = {
   userEmail: string,
+  userPicture: string,
   poolId: string,
   pathname: string,
   connectClient: func.isRequired,

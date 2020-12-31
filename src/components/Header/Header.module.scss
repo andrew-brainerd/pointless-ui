@@ -27,7 +27,7 @@
     width: 50px;
   }
 
-  .player {
+  .user {
     align-content: center;
     display: flex;
     flex-direction: column;
@@ -36,6 +36,11 @@
     line-height: 25px;
     margin-right: 25px;
     white-space: nowrap;
+
+    img {
+      border-radius: 50%;
+      width: 40px;
+    }
   }
 
   .buttonContainer {

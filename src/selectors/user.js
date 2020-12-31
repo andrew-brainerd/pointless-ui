@@ -6,6 +6,8 @@ export const getCurrentUser = path(['users', 'currentUser']);
 
 export const getCurrentUserEmail = compose(prop('email'), getCurrentUser);
 
+export const getCurrentUserPicture = compose(prop('picture'), getCurrentUser);
+
 export const getIsCheckingUsername = path(['users', 'isCheckingUsername']);
 
 export const getIsUsernameAvailable = path(['users', 'isUsernameAvailable']);
