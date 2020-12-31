@@ -6,7 +6,9 @@ import styles from './NumberInput.module.scss';
 const NumberInput = ({
   name,
   className,
-  value = 0,
+  value = '0',
+  minimum = 0,
+  maximum = Infinity,
   inputClassName,
   autofocus,
   isValid = true,
@@ -52,6 +54,8 @@ const NumberInput = ({
         ].join(' ')}
         ref={inputRef}
         value={value}
+        min={minimum}
+        max={maximum}
         autoComplete={'false'}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
@@ -65,7 +69,9 @@ const NumberInput = ({
 NumberInput.propTypes = {
   name: string,
   className: string,
-  value: number,
+  value: string,
+  minimum: number,
+  maximum: number,
   inputClassName: string,
   error: string,
   autofocus: bool,

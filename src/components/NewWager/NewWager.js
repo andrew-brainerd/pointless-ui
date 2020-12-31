@@ -11,7 +11,7 @@ import styles from './NewWager.module.scss';
 
 const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWager, navTo }) => {
   const [wager, setWager] = useState({
-    amount: 0,
+    amount: '0',
     description: '',
     createdBy: userEmail,
     users: [
