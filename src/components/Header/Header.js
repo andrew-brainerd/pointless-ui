@@ -7,7 +7,18 @@ import Button from '../common/Button/Button';
 import Icon from '../common/Icon/Icon';
 import styles from './Header.module.scss';
 
-const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, loadPool, navTo }) => {
+const Header = ({
+  userEmail,
+  poolId,
+  pathname,
+  connectClient,
+  setCurrentUser,
+  notify,
+  loadPool,
+  showSubHeader,
+  hideSubHeader,
+  navTo
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, isLoading, user } = useAuth0();
   const menuRef = useRef();
@@ -30,6 +41,17 @@ const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, load
       );
     }
   }, [userEmail, connectClient, notify, loadPool, poolId]);
+
+  useEffect(() => {
+    console.log('Pathname', pathname);
+    if (pathname === '/notifications') {
+      console.log('Hiding sub header');
+      hideSubHeader();
+    } else {
+      console.log('Showing sub header');
+      showSubHeader();
+    }
+  }, [pathname]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
@@ -89,10 +111,13 @@ const Header = ({ userEmail, poolId, connectClient, setCurrentUser, notify, load
 Header.propTypes = {
   userEmail: string,
   poolId: string,
+  pathname: string,
   connectClient: func.isRequired,
   setCurrentUser: func.isRequired,
   notify: func.isRequired,
   loadPool: func.isRequired,
+  showSubHeader: func.isRequired,
+  hideSubHeader: func.isRequired,
   navTo: func.isRequired
 };
 

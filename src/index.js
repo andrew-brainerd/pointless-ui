@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore, { history, sagaMiddleware } from './store/configureStore';
 import sagas from './sagas';
-import App from './components/App/App';
+import App from './components/App/container';
 import ReactModal from 'react-modal';
 import './index.scss';
 

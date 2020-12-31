@@ -10,6 +10,12 @@
     align-items: center;
     display: flex;
     margin-left: 10px;
+
+    svg {
+      fill: $gray-0;
+      height: 30px;
+      width: 30px;
+    }
   }
 }
 

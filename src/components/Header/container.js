@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import { getCurrentUserEmail } from '../../selectors/user';
-import { getPoolId } from '../../selectors/routing';
+import { getPoolId, getPathname } from '../../selectors/routing';
 import { connectClient } from '../../actions/pusher';
 import { setCurrentUser } from '../../actions/users';
 import { loadPool } from '../../actions/pools';
 import { displayNotification } from '../../actions/notify';
+import { showSubHeader, hideSubHeader } from '../../actions/config';
 import { navTo } from '../../actions/routing';
 import Header from './Header';
 
 const mapStateToProps = state => ({
   userEmail: getCurrentUserEmail(state),
-  poolId: getPoolId(state)
+  poolId: getPoolId(state),
+  pathname: getPathname(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -18,6 +20,8 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUser: email => dispatch(setCurrentUser(email)),
   notify: (title, message, time) => dispatch(displayNotification(title, message, time)),
   loadPool: poolId => dispatch(loadPool(poolId)),
+  showSubHeader: () => dispatch(showSubHeader),
+  hideSubHeader: () => dispatch(hideSubHeader),
   navTo: path => dispatch(navTo(path))
 });
 
