@@ -12,7 +12,7 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications 
 
   return isLoading ? <Loading message='Loading Notifications' /> : (
     <div className={styles.notifications}>
-      {isEmpty(notifications) ? (
+      {userEmail && isEmpty(notifications) ? (
         <div className={styles.noNotifications}>
           No notifications
         </div>

@@ -1,3 +1,5 @@
+@import '../../styles/colors';
+
 .notifications {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,7 @@
       margin-right: 10px;
 
       img {
+        border: 1px solid $gray-0;
         border-radius: 50%;
         width: 60px;
       }

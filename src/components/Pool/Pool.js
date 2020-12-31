@@ -48,20 +48,22 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
           >
             <Icon name={'plus'} title={'New Wager'} />
           </Button>
-          <Button
-            className={styles.deleteButton}
-            type={'hazard'}
-            onClick={() => {
-              if ((pool.wagers || []).length === 0) {
-                deletePool(poolId);
-              } else {
-                console.error('Can\'t delete a pool with wagers');
-              }
-            }}
-            text={'Delete Pool'}
-          >
-            <Icon name={'trash'} title={'Delete Pool'} />
-          </Button>
+          {(pool.wagers || []).length === 0 && (
+            <Button
+              className={styles.deleteButton}
+              type={'hazard'}
+              onClick={() => {
+                if ((pool.wagers || []).length === 0) {
+                  deletePool(poolId);
+                } else {
+                  console.error('Can\'t delete a pool with wagers');
+                }
+              }}
+              text={'Delete Pool'}
+            >
+              <Icon name={'trash'} title={'Delete Pool'} />
+            </Button>
+          )}
         </div>
       </SubHeader>
       {isLoading ? <Loading /> : (
