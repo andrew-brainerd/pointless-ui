@@ -68,14 +68,16 @@ const Header = ({
             <img src={userPicture} alt='User Profile' />
           </div>
         )}
-        <div className={styles.buttonContainer}>
-          <Button
-            text={'Notifications'}
-            onClick={() => navTo(NOTIFICATIONS_ROUTE.replace(':userEmail', userEmail))}
-          >
-            <Icon name={'bell'} title={'Notifications'} />
-          </Button>
-        </div>
+        {userEmail && (
+          <div className={styles.buttonContainer}>
+            <Button
+              text={'Notifications'}
+              onClick={() => navTo(NOTIFICATIONS_ROUTE.replace(':userEmail', userEmail))}
+            >
+              <Icon name={'bell'} title={'Notifications'} />
+            </Button>
+          </div>
+        )}
       </div>
       {isMenuOpen &&
         <div className={styles.headerMenu} ref={menuRef}>

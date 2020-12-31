@@ -17,6 +17,10 @@ const iconCreators = [
   {
     authorName: 'Dave Gandy',
     authorLink: 'https://www.flaticon.com/authors/dave-gandy'
+  },
+  {
+    authorName: 'iconixar',
+    authorLink: 'https://www.flaticon.com/authors/iconixar'
   }
 ];
 

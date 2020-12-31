@@ -8,6 +8,7 @@ import Button from '../common/Button/Button';
 import TextInput from '../common/TextInput/TextInput';
 import Loading from '../common/Loading/Loading';
 import styles from './Home.module.scss';
+import Icon from '../common/Icon/Icon';
 
 const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo }) => {
   const [isCreatingNewPool, setIsCreatingNewPool] = useState(false);
@@ -18,7 +19,7 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
     userEmail && loadPools(userEmail);
   }, [userEmail, loadPools]);
 
-  return (
+  return userEmail ? (
     <>
       <SubHeader>
         {isCreatingNewPool && (
@@ -85,6 +86,13 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
         </div>
       )}
     </>
+  ) : (
+    <div className={styles.notSignedIn}>
+      <div className={styles.notSignedInArrow}>
+        <Icon name={'arrow'} />
+      </div>
+      Please sign in to continue
+    </div>
   );
 };
 

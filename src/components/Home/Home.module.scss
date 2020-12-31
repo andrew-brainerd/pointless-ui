@@ -2,6 +2,21 @@
 @import '../../styles/mixins';
 @import '../../styles/sizing';
 
+.notSignedIn {
+  font-size: 30px;
+  text-align: center;
+
+  svg {
+    fill: $gray-0;
+    left: 15px;
+    position: absolute;
+    height: 50px;
+    top: 55px;
+    transform: rotate(270deg);
+    width: 50px;
+  }
+}
+
 .poolControls {
   align-items: center;
   display: flex;
