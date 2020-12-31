@@ -3,23 +3,42 @@
   flex-direction: column;
   justify-content: center;
 
+  .noNotifications {
+    font-size: 1.3em;
+    margin: 50px 0;
+    text-align: center;
+  }
+
   .notification {
+    align-items: center;
+    display: flex;
     margin: 20px auto;
     width: 90%;
 
-    .title {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin: 7px auto;
+    .profilePic {
+      margin-right: 10px;
+
+      img {
+        border-radius: 50%;
+        width: 60px;
+      }
     }
 
-    .message {
-      margin-bottom: 5px;
-    }
-
-    .timestamp {
-      font-size: 0.8em;
-      opacity: 0.7;
+    .content {
+      .title {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 7px auto;
+      }
+  
+      .message {
+        margin-bottom: 5px;
+      }
+  
+      .timestamp {
+        font-size: 0.8em;
+        opacity: 0.7;
+      } 
     }
   }
 }

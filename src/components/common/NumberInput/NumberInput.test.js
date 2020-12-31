@@ -38,17 +38,17 @@ describe('NumberInput Component', () => {
 
   describe('Default input value', () => {
     it('should set input value to given value', () => {
-      props.value = 42;
+      props.value = '42';
       const component = render().find('input');
 
-      expect(component.props().value).toEqual(42);
+      expect(component.props().value).toEqual('42');
     });
 
     it('should set input value to default value', () => {
       props.value = undefined;
       const component = render().find('input');
 
-      expect(component.props().value).toEqual(0);
+      expect(component.props().value).toEqual('0');
     });
   });
 
