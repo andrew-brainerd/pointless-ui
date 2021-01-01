@@ -9,13 +9,15 @@ import {
   poolDeleted,
   wagerCreated,
   wagerDeleted,
+  userInvited,
   LOAD_POOLS,
   LOAD_POOL,
   CREATE_POOL,
   DELETE_POOL,
   CREATE_WAGER,
   DELETE_WAGER,
-  ADD_USER
+  ADD_USER,
+  INVITE_USER
 } from '../actions/pools';
 
 export function* loadPools({ userEmail }) {
@@ -99,6 +101,17 @@ export function* addUser({ poolId, userEmail }) {
   }
 }
 
+export function* inviteUser({ poolId, inviteEmail }) {
+  try {
+    const response = yield call(api.inviteUser, poolId, inviteEmail);
+    if (response) {
+      yield put(userInvited(response));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* loadPoolsWatcher() {
   yield takeLatest(LOAD_POOLS, loadPools);
 }
@@ -125,4 +138,8 @@ export function* deleteWagerWatcher() {
 
 export function* addUserWatcher() {
   yield takeLatest(ADD_USER, addUser);
+}
+
+export function* inviteUserWatcher() {
+  yield takeLatest(INVITE_USER, inviteUser);
 }

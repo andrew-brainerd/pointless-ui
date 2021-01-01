@@ -56,3 +56,12 @@ export const addUser = async (poolId, userEmail) => {
 
   return response;
 };
+
+export const inviteUser = async (poolId, userEmail) => {
+  console.log('Inviting User', userEmail);
+  const response = await client.post('/notifications/invitation', { to: userEmail, poolId, location: window.location })
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};

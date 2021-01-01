@@ -12,7 +12,7 @@ import Icon from '../common/Icon/Icon';
 import styles from './Pool.module.scss';
 import TextInput from '../common/TextInput/TextInput';
 
-const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
+const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isInvitingUser, setIsInvitingUser] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -23,6 +23,15 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUs
   useEffect(() => {
     shouldLoadPool && loadPool(poolId);
   }, [shouldLoadPool, loadPool, poolId]);
+
+  useEffect(() => {
+    if (userEmail && pool.users) {
+      if (!pool.users.includes(userEmail)) {
+        alert(`Adding user [${userEmail}] to pool`);
+        addUser(poolId, userEmail);
+      }
+    }
+  }, [userEmail, pool.users, addUser, poolId]);
 
   return (
     <>
@@ -127,7 +136,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUs
                   type={isInvitingUser ? 'primary' : 'default'}
                   onClick={() => {
                     if (isInvitingUser) {
-                      addUser(poolId, inviteEmail);
+                      inviteUser(poolId, inviteEmail);
                     } else {
                       setIsUsersModalOpen(false);
                     }
@@ -146,6 +155,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUs
 };
 
 Pool.propTypes = {
+  userEmail: string,
   poolId: string,
   isLoading: bool,
   pool: object,
