@@ -19,7 +19,7 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
     userEmail && loadPools(userEmail);
   }, [userEmail, loadPools]);
 
-  return userEmail ? (
+  return userEmail && !isLoadingUser ? (
     <>
       <SubHeader>
         {isCreatingNewPool && (

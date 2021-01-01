@@ -9,6 +9,7 @@ const NumberInput = ({
   value = '0',
   minimum = 0,
   maximum = Infinity,
+  step = 1,
   inputClassName,
   autofocus,
   isValid = true,
@@ -56,6 +57,7 @@ const NumberInput = ({
         value={value}
         min={minimum}
         max={maximum}
+        step={step}
         autoComplete={'false'}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
@@ -72,6 +74,7 @@ NumberInput.propTypes = {
   value: string,
   minimum: number,
   maximum: number,
+  step: number,
   inputClassName: string,
   error: string,
   autofocus: bool,

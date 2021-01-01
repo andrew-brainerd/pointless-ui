@@ -49,6 +49,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
         <div className={styles.amountLabel}>{'I\'m willing to risk: '}</div>
         <NumberInput
           value={wager.amount}
+          step={5}
           onChange={value =>
             setWager({ ...wager, amount: value })
           }
