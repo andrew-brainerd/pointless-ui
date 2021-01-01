@@ -66,7 +66,7 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
           />
         )}
       </SubHeader>
-      {(isLoading || isLoadingUser) ? <Loading /> : (
+      {(isLoading || isLoadingUser) ? <Loading message={'Loading Pools'} /> : (
         <div className={[styles.home, isMobile ? styles.mobile : ''].join(' ')}>
           <div className={styles.pageHeader}>
             <div className={styles.myPools}>

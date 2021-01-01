@@ -33,7 +33,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
     console.log('Wager', wager);
   }, [wager]);
 
-  return isLoading ? <Loading /> : (
+  return isLoading ? <Loading message={'Loading Wager'} /> : (
     <div className={styles.newWager}>
       <div className={styles.description}>
         <div className={styles.descriptionLabel}>I bet:</div>

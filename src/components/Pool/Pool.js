@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { string, bool, object, func } from 'prop-types';
 import { isMobile } from 'react-device-detect';
 import { isEmpty } from 'ramda';
-import { NEW_WAGER_ROUTE } from '../../constants/routes';
+import { NEW_WAGER_ROUTE, WAGER_ROUTE } from '../../constants/routes';
 import usePrevious from '../../hooks/usePrevious';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Loading from '../common/Loading/Loading';
@@ -12,9 +12,7 @@ import Icon from '../common/Icon/Icon';
 import styles from './Pool.module.scss';
 import TextInput from '../common/TextInput/TextInput';
 
-const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, inviteUser, addUser, navTo }) => {
-  const [selectedWager, setSelectedWager] = useState(null);
-  const [isWagerModalOpen, setIsWagerModalOpen] = useState(false);
+const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isInvitingUser, setIsInvitingUser] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -66,14 +64,14 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
           )}
         </div>
       </SubHeader>
-      {isLoading ? <Loading /> : (
+      {isLoading ? <Loading message={'Loading Pool'} /> : (
         <div className={styles.pool}>
           <div className={styles.wagerList}>
-            {isEmpty(pool.wagers) ? (
+            {!pool.wagers || isEmpty(pool.wagers) ? (
               <div className={styles.noWagers}>
-                No Open Wagers
+                No Wagers
               </div>
-            ) : (pool.wagers || []).map(wager => (
+            ) : pool.wagers.map(wager => (
               <div
                 key={wager._id}
                 className={[
@@ -81,8 +79,7 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
                   !wager.isActive ? styles.inactive : ''
                 ].join(' ')}
                 onClick={() => {
-                  setSelectedWager(wager);
-                  setIsWagerModalOpen(true);
+                  navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
                 }}
               >
                 <div className={styles.amount}>{wager.amount} pts.</div>
@@ -90,38 +87,6 @@ const Pool = ({ poolId, isLoading, pool, loadPool, deletePool, deleteWager, invi
               </div>
             ))}
           </div>
-          {isWagerModalOpen && (
-            <Modal
-              className={styles.modal}
-              contentClassName={styles.modalContent}
-              isOpen={isWagerModalOpen}
-              isDraggable={!isMobile}
-              showHeader={false}
-              contentHeight={250}
-              closeModal={() => {
-                setIsWagerModalOpen(false);
-              }}
-            >
-              <div className={styles.selectedWager}>
-                <div className={styles.amount}>{selectedWager.amount}</div>
-                <div className={styles.description}>{selectedWager.description}</div>
-              </div>
-              <div className={styles.buttonContainer}>
-                <Button
-                  type={'hazard'}
-                  onClick={() => {
-                    deleteWager(poolId, selectedWager._id);
-                    setIsWagerModalOpen(false);
-                  }}
-                  text={'Cancel Wager'}
-                />
-                <Button
-                  onClick={() => setIsWagerModalOpen(false)}
-                  text={'Close'}
-                />
-              </div>
-            </Modal>
-          )}
           {isUsersModalOpen && (
             <Modal
               className={styles.modal}
