@@ -41,7 +41,7 @@ const Header = ({
         'notify',
         data => {
           console.log('Notification Added', data);
-          loadNotifications(userEmail);
+          loadNotifications(userEmail, false);
         });
     }
   }, [userEmail, connectClient, notify, loadPool, poolId, loadNotifications]);

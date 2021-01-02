@@ -22,6 +22,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-svg": "^11.2.1",
+    "react-transition-group": "^4.4.1",
     "redux-saga": "^1.1.3",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",

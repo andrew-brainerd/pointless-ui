@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   loadPool: poolId => dispatch(loadPool(poolId)),
   showSubHeader: () => dispatch(showSubHeader),
   hideSubHeader: () => dispatch(hideSubHeader),
-  loadNotifications: userEmail => dispatch(loadNotifications(userEmail)),
+  loadNotifications: (userEmail, showLoading) => dispatch(loadNotifications(userEmail, showLoading)),
   navTo: path => dispatch(navTo(path))
 });
 

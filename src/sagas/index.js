@@ -9,7 +9,11 @@ import {
   addUserWatcher,
   inviteUserWatcher
 } from './pools';
-import { loadNotificationsWatcher } from './notifications';
+import {
+  loadNotificationsWatcher,
+  markNotificationAsReadWatcher,
+  markNotificationAsDismissedWatcher
+} from './notifications';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +25,8 @@ export default function* rootSaga() {
     deleteWagerWatcher(),
     addUserWatcher(),
     inviteUserWatcher(),
-    loadNotificationsWatcher()
+    loadNotificationsWatcher(),
+    markNotificationAsReadWatcher(),
+    markNotificationAsDismissedWatcher()
   ]);
 }

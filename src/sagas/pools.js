@@ -81,9 +81,6 @@ export function* deleteWager({ poolId, wagerId }) {
   try {
     const response = yield call(api.deleteWager, poolId, wagerId);
     if (response) {
-      // yield put(wagerDeleted(response));
-      // yield loadPool({ poolId });
-      console.log('Wager Deleted', { poolId, wagerId });
       yield put(navTo(POOL_ROUTE.replace(':poolId', poolId)));
     }
   } catch (err) {

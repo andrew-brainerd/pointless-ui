@@ -6,6 +6,7 @@ const initialState = {
   title: 'New Notification',
   message: 'The platypus is only found in eastern Australia in small rivers and streams within the states of Queensland, New South Wales, Victoria and Tasmania.',
   isLoadingNotifications: true,
+  isInitialLoad: true,
   notifications: []
 };
 
@@ -25,14 +26,16 @@ export default function notify (state = initialState, action) {
         hidden: true
       };
     case LOAD_NOTIFICATIONS:
+      console.log('Loading Notifications', action);
       return {
         ...state,
-        isLoadingNotifications: true
+        isLoadingNotifications: action.showLoading
       };
     case NOTIFICATIONS_LOADED:
       return {
         ...state,
         isLoadingNotifications: false,
+        isInitialLoad: false,
         notifications: action.notifications
       };
     default:

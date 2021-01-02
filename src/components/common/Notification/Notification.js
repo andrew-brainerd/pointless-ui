@@ -15,7 +15,7 @@ const Notification = ({ hidden, category, title, message, close, navTo }) => {
         hidden ? styles.hidden : ''
       ].join(' ')}
       onClick={() => {
-        navTo(NOTIFICATIONS_ROUTE)
+        navTo(NOTIFICATIONS_ROUTE);
         close();
       }}
     >
