@@ -17,7 +17,7 @@
   min-width: 150px;
   opacity: 1;
   overflow: hidden;
-  padding: 15px 25px;
+  padding: 10px;
   position: absolute;
   right: 0;
   transition: 0.5s all cubic-bezier(0, 1, 0.5, 1);
@@ -32,9 +32,11 @@
   }
 
   .content {
+    width: 75%;
+
     .title {
       color: $gray-20;
-      font-size: 1.1em;
+      font-size: 0.9em;
       font-weight: bold;
       margin-bottom: 5px;
       overflow-x: hidden;
@@ -44,7 +46,7 @@
     }
 
     .message {
-      font-size: 1em;
+      font-size: 0.7em;
       overflow-x: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

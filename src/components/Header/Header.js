@@ -18,6 +18,7 @@ const Header = ({
   loadPool,
   showSubHeader,
   hideSubHeader,
+  loadNotifications,
   navTo
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,10 +39,12 @@ const Header = ({
       connectClient(
         userEmail,
         'notify',
-        data => console.log('Notification Added', data)
-      );
+        data => {
+          console.log('Notification Added', data);
+          loadNotifications(userEmail);
+        });
     }
-  }, [userEmail, connectClient, notify, loadPool, poolId]);
+  }, [userEmail, connectClient, notify, loadPool, poolId, loadNotifications]);
 
   useEffect(() => {
     if (pathname === '/notifications') {
@@ -123,6 +126,7 @@ Header.propTypes = {
   loadPool: func.isRequired,
   showSubHeader: func.isRequired,
   hideSubHeader: func.isRequired,
+  loadNotifications: func.isRequired,
   navTo: func.isRequired
 };
 

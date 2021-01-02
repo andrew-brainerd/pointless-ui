@@ -80,7 +80,7 @@ const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, invite
               <div className={styles.noWagers}>
                 No Wagers
               </div>
-            ) : pool.wagers.map(wager => (
+            ) : (pool.wagers || []).map(wager => (
               <div
                 key={wager._id}
                 className={[

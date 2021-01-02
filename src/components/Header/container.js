@@ -4,7 +4,7 @@ import { getPoolId, getPathname } from '../../selectors/routing';
 import { connectClient } from '../../actions/pusher';
 import { setCurrentUser } from '../../actions/users';
 import { loadPool } from '../../actions/pools';
-import { displayNotification } from '../../actions/notify';
+import { displayNotification, loadNotifications } from '../../actions/notify';
 import { showSubHeader, hideSubHeader } from '../../actions/config';
 import { navTo } from '../../actions/routing';
 import Header from './Header';
@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
   loadPool: poolId => dispatch(loadPool(poolId)),
   showSubHeader: () => dispatch(showSubHeader),
   hideSubHeader: () => dispatch(hideSubHeader),
+  loadNotifications: userEmail => dispatch(loadNotifications(userEmail)),
   navTo: path => dispatch(navTo(path))
 });
 

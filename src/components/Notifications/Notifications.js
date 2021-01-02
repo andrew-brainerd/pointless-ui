@@ -28,7 +28,12 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications 
             )}
             <div className={styles.content}>
               <div className={styles.title}>{notification.title}</div>
-              <div className={styles.message}>{notification.message}</div>
+              <div
+                className={styles.message}
+                dangerouslySetInnerHTML={{
+                  __html: notification.message
+                }}
+              ></div>
               <div className={styles.timestamp}>
                 {getRelativeDate(notification.timestamp)}
               </div>

@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadPool: poolId => dispatch(loadPool(poolId)),
   acceptWager: wagerId => dispatch(acceptWager(wagerId)),
-  deleteWager: wagerId => dispatch(deleteWager(wagerId)),
+  deleteWager: (poolId, wagerId) => dispatch(deleteWager(poolId, wagerId)),
   navTo: path => dispatch(navTo(path))
 });
 

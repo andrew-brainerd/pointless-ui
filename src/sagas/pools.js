@@ -8,7 +8,6 @@ import {
   poolCreated,
   poolDeleted,
   wagerCreated,
-  wagerDeleted,
   userInvited,
   LOAD_POOLS,
   LOAD_POOL,
@@ -82,8 +81,10 @@ export function* deleteWager({ poolId, wagerId }) {
   try {
     const response = yield call(api.deleteWager, poolId, wagerId);
     if (response) {
-      yield put(wagerDeleted(response));
-      yield loadPool({ poolId });
+      // yield put(wagerDeleted(response));
+      // yield loadPool({ poolId });
+      console.log('Wager Deleted', { poolId, wagerId });
+      yield put(navTo(POOL_ROUTE.replace(':poolId', poolId)));
     }
   } catch (err) {
     console.error(err);

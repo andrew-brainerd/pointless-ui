@@ -13,10 +13,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
   const [wager, setWager] = useState({
     amount: '0',
     description: '',
-    createdBy: userEmail,
-    users: [
-      userEmail
-    ]
+    users: []
   });
 
   useEffect(() => {
@@ -27,13 +24,13 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
     return !wager.users.includes(poolUser) && poolUser !== userEmail;
   }).map(user => ({ value: user, label: user }));
 
-  const isWagerInValid = () => wager.amount <= 0 || wager.description === '' || isEmpty(wager.users);
+  const isWagerInvalid = () => wager.amount <= 0 || wager.description === '' || isEmpty(wager.users);
 
   useEffect(() => {
     console.log('Wager', wager);
   }, [wager]);
 
-  return isLoading ? <Loading message={'Loading Wager'} /> : (
+  return isLoading || !userEmail ? <Loading message={'Loading Wager'} /> : (
     <div className={styles.newWager}>
       <div className={styles.description}>
         <div className={styles.descriptionLabel}>I bet:</div>
@@ -85,9 +82,19 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
         />
         <Button
           type={'primary'}
-          onClick={() => createWager(poolId, userEmail, wager)}
+          onClick={() => {
+            console.log('Creating wager', { poolId, userEmail, wager });
+            createWager(
+              poolId,
+              userEmail,
+              {
+                ...wager,
+                createdBy: userEmail,
+                users: [...wager.users, userEmail]
+              });
+          }}
           text={'Create Wager'}
-          disabled={isWagerInValid()}
+          disabled={isWagerInvalid()}
         />
       </div>
     </div>

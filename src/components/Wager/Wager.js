@@ -12,7 +12,7 @@ const Wager = ({
   isAvailableWager,
   userEmail,
   poolId,
-  wager,
+  wager = {},
   loadPool,
   acceptWager,
   deleteWager,

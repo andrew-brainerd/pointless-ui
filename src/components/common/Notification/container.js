@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { hideNotification } from '../../../actions/notify';
+import { navTo } from '../../../actions/routing';
 import Notification from './Notification';
 
 const mapStateToProps = ({ notify }) => ({
@@ -10,7 +11,8 @@ const mapStateToProps = ({ notify }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  close: () => dispatch(hideNotification)
+  close: () => dispatch(hideNotification),
+  navTo: path => dispatch(navTo(path))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notification);
