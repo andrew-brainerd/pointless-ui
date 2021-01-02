@@ -83,7 +83,6 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
         <Button
           type={'primary'}
           onClick={() => {
-            console.log('Creating wager', { poolId, userEmail, wager });
             createWager(
               poolId,
               userEmail,

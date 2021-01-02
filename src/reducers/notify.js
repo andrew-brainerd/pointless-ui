@@ -1,4 +1,4 @@
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, LOAD_NOTIFICATIONS, NOTIFICATIONS_LOADED } from '../actions/notify';
+import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, LOAD_NOTIFICATIONS, NOTIFICATIONS_LOADED, MARK_ALL_AS_READ, MARK_AS_READ, DISMISS } from '../actions/notify';
 
 const initialState = {
   hidden: true,
@@ -6,11 +6,10 @@ const initialState = {
   title: 'New Notification',
   message: 'The platypus is only found in eastern Australia in small rivers and streams within the states of Queensland, New South Wales, Victoria and Tasmania.',
   isLoadingNotifications: true,
-  isInitialLoad: true,
   notifications: []
 };
 
-export default function notify (state = initialState, action) {
+export default function notify(state = initialState, action) {
   switch (action.type) {
     case SHOW_NOTIFICATION:
       return {
@@ -26,7 +25,6 @@ export default function notify (state = initialState, action) {
         hidden: true
       };
     case LOAD_NOTIFICATIONS:
-      console.log('Loading Notifications', action);
       return {
         ...state,
         isLoadingNotifications: action.showLoading
@@ -35,8 +33,38 @@ export default function notify (state = initialState, action) {
       return {
         ...state,
         isLoadingNotifications: false,
-        isInitialLoad: false,
         notifications: action.notifications
+      };
+    case MARK_ALL_AS_READ:
+      return {
+        ...state,
+        notifications: state.notifications.map(notification => {
+          return {
+            ...notification,
+            isRead: true
+          };
+        })
+      };
+    case MARK_AS_READ:
+      return {
+        ...state,
+        notifications: state.notifications.map(notification => {
+          if (action.notificationId === notification._id) {
+            return {
+              ...notification,
+              isRead: true
+            };
+          } else {
+            return notification;
+          }
+        })
+      };
+    case DISMISS:
+      return {
+        ...state,
+        notifications: state.notifications.filter(notification => {
+          return action.notificationId !== notification._id;
+        })
       };
     default:
       return state;

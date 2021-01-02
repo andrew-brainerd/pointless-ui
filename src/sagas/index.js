@@ -11,6 +11,7 @@ import {
 } from './pools';
 import {
   loadNotificationsWatcher,
+  markAllNotificationAsReadWatcher,
   markNotificationAsReadWatcher,
   markNotificationAsDismissedWatcher
 } from './notifications';
@@ -26,6 +27,7 @@ export default function* rootSaga() {
     addUserWatcher(),
     inviteUserWatcher(),
     loadNotificationsWatcher(),
+    markAllNotificationAsReadWatcher(),
     markNotificationAsReadWatcher(),
     markNotificationAsDismissedWatcher()
   ]);

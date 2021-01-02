@@ -5,6 +5,15 @@
   flex-direction: column;
   justify-content: center;
 
+  .header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px auto;
+    max-width: 700px;
+    width: 90%;
+  }
+
   .noNotifications {
     font-size: 1.3em;
     margin: 50px 0;
@@ -15,6 +24,8 @@
     align-items: center;
     display: flex;
     margin: 20px auto;
+    max-width: 700px;
+    transition: 0.3s all ease;
     width: 90%;
 
     &.read {
@@ -23,6 +34,7 @@
       .controls {
         .readButton {
           background: transparent;
+          cursor: default;
         }
       }
     }
@@ -65,7 +77,7 @@
       display: flex;
 
       .readButton {
-        background: $oldBlueBackground;
+        background: #6987a6;
         border: 1px solid $gray-0;
         border-radius: 50%;
         cursor: pointer;

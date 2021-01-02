@@ -9,6 +9,14 @@ export const loadNotifications = async userEmail => {
   return response;
 };
 
+export const markAllAsRead = async userEmail => {
+  const response = await client.patch('/notifications/readAll', { userEmail })
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};
+
 export const markAsRead = async (userEmail, notificationId) => {
   const response = await client.patch(`/notifications/${notificationId}/read`, { userEmail })
     .then(prop('data'))
