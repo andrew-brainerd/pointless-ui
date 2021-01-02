@@ -9,7 +9,7 @@ import Select from '../common/Select/Select';
 import Button from '../common/Button/Button';
 import styles from './NewWager.module.scss';
 
-const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWager, navTo }) => {
+const NewWager = ({ isLoading, isCreatingWager, poolId, userEmail, poolUsers, loadPool, createWager, navTo }) => {
   const [wager, setWager] = useState({
     amount: '0',
     description: '',
@@ -93,7 +93,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
               });
           }}
           text={'Create Wager'}
-          disabled={isWagerInvalid()}
+          disabled={isWagerInvalid() || isCreatingWager}
         />
       </div>
     </div>
@@ -102,6 +102,7 @@ const NewWager = ({ isLoading, poolId, userEmail, poolUsers, loadPool, createWag
 
 NewWager.propTypes = {
   isLoading: bool,
+  isCreatingWager: bool,
   poolId: string,
   userEmail: string,
   poolUsers: array,

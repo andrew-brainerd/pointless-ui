@@ -8,6 +8,8 @@ export const getIsLoadingPools = path(['pools', 'isLoadingPools']);
 
 export const getIsLoadingPool = path(['pools', 'isLoadingPool']);
 
+export const getIsCreatingWager = path(['pools', 'isCreatingWager']);
+
 export const getUserPools = path(['pools', 'userPools']);
 
 export const getSelectedPool = path(['pools', 'selectedPool']);

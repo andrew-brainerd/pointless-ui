@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import { getPoolId } from '../../selectors/routing';
 import { getCurrentUserEmail } from '../../selectors/user';
-import { getPoolUsers } from '../../selectors/pools';
+import { getIsCreatingWager, getPoolUsers } from '../../selectors/pools';
 import { loadPool, createWager } from '../../actions/pools';
 import { navTo } from '../../actions/routing';
 import NewWager from './NewWager';
 
 const mapStateToProps = state => ({
+  isCreatingWager: getIsCreatingWager(state),
   poolId: getPoolId(state),
   userEmail: getCurrentUserEmail(state),
   poolUsers: getPoolUsers(state)

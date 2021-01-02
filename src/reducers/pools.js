@@ -3,12 +3,14 @@ import {
   POOLS_LOADED,
   LOAD_POOL,
   POOL_LOADED,
-  CREATE_WAGER
+  CREATE_WAGER,
+  WAGER_CREATED
 } from '../actions/pools';
 
 export const initialState = {
   isLoadingPools: true,
   isLoadingPool: true,
+  isCreatingWager: false,
   userPools: [],
   selectedPool: {}
 };
@@ -44,6 +46,11 @@ const pools = (state = initialState, action) => {
         ...state,
         isCreatingWager: true,
         userPools: []
+      };
+    case WAGER_CREATED:
+      return {
+        ...state,
+        isCreatingWager: false
       };
     default:
       return state;
