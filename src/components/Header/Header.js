@@ -34,7 +34,12 @@ const Header = ({
       connectClient(
         userEmail,
         'push',
-        data => notify(data.category, data.title, data.message)
+        data => {
+          notify(data.category, data.title, data.message);
+          if (data.title === 'User Added') {
+            loadPool(poolId);
+          }
+        }
       );
       connectClient(
         userEmail,

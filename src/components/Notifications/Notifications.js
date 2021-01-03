@@ -49,7 +49,15 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications,
                         <img src={(notification.createdByUser || {}).picture} alt='Profile Pic' />
                       </div>
                     )}
-                    <div className={styles.content}>
+                    <a
+                      className={[
+                        styles.content,
+                        !notification.link ? styles.disabled : ''
+                      ].join(' ')}
+                      href={notification.link}
+                      target={'_blank'}
+                      rel={'noopener noreferrer'}
+                    >
                       <div className={styles.title}>{notification.title}</div>
                       <div
                         className={styles.message}
@@ -58,7 +66,7 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications,
                       <div className={styles.timestamp}>
                         {getRelativeDate(notification.timestamp)}
                       </div>
-                    </div>
+                    </a>
                     <div className={styles.controls}>
                       <div
                         className={styles.readButton}

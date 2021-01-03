@@ -113,6 +113,7 @@ const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, invite
                   <TextInput
                     value={inviteEmail}
                     onChange={setInviteEmail}
+                    autofocus
                   />
                 </div>
               ) : (
