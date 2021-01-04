@@ -10,6 +10,7 @@ import styles from './Wager.module.scss';
 const Wager = ({
   isLoading,
   isAvailableWager,
+  isAcceptingWager,
   userEmail,
   poolId,
   wager = {},
@@ -45,7 +46,8 @@ const Wager = ({
             <Button
               className={styles.acceptButton}
               text={'Accept Wager'}
-              onClick={() => acceptWager()}
+              onClick={() => acceptWager(poolId, wager._id, userEmail)}
+              disabled={isAcceptingWager || isLoading}
             />
           )}
           <Button
@@ -64,6 +66,7 @@ const Wager = ({
 Wager.propTypes = {
   isLoading: bool,
   isAvailableWager: bool,
+  isAcceptingWager: bool,
   userEmail: string,
   poolId: string,
   wagerId: string,

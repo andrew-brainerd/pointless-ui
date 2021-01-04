@@ -11,7 +11,7 @@
   height: 20px;
   padding: 10px;
   text-align: center;
-  transition: 0.3s all;
+  transition: 0.3s transform ease;
   user-select: none;
 
   &.animateHover {
@@ -27,6 +27,10 @@
 
   &.hazard {
     background: $errorRed;
+  }
+
+  &:active {
+    background: black;
   }
 }
 

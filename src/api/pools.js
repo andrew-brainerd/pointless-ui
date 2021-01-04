@@ -64,3 +64,11 @@ export const inviteUser = async (poolId, userEmail) => {
 
   return response;
 };
+
+export const acceptWager = async (poolId, wagerId, userEmail) => {
+  const response = await client.patch(`/pools/${poolId}/wagers/${wagerId}/accept`, { userEmail })
+    .then(prop('data'))
+    .catch(err => console.error(err));
+
+  return response;
+};

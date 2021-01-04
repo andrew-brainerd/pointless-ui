@@ -26,10 +26,6 @@ const NewWager = ({ isLoading, isCreatingWager, poolId, userEmail, poolUsers, lo
 
   const isWagerInvalid = () => wager.amount <= 0 || wager.description === '' || isEmpty(wager.users);
 
-  useEffect(() => {
-    console.log('Wager', wager);
-  }, [wager]);
-
   return isLoading || !userEmail ? <Loading message={'Loading Wager'} /> : (
     <div className={styles.newWager}>
       <div className={styles.description}>

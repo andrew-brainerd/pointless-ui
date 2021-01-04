@@ -55,8 +55,8 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications,
                         !notification.link ? styles.disabled : ''
                       ].join(' ')}
                       href={notification.link}
-                      target={'_blank'}
                       rel={'noopener noreferrer'}
+                      onClick={() => markAsRead(userEmail, notification._id)}
                     >
                       <div className={styles.title}>{notification.title}</div>
                       <div

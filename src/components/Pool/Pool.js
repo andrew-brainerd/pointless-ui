@@ -101,7 +101,7 @@ const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, invite
               className={styles.modal}
               contentClassName={styles.modalContent}
               isOpen={isUsersModalOpen}
-              isDraggable={!isMobile}
+              isDraggable={false && !isMobile}
               headerText={'Users in Pool'}
               contentHeight={250}
               closeModal={() => {

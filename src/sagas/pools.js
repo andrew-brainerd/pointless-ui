@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as api from '../api/pools';
-import { HOME_ROUTE, POOL_ROUTE } from '../constants/routes';
+import { HOME_ROUTE, POOL_ROUTE, WAGER_ROUTE } from '../constants/routes';
 import { navTo } from '../actions/routing';
 import {
   poolsLoaded,
@@ -9,6 +9,7 @@ import {
   poolDeleted,
   wagerCreated,
   userInvited,
+  wagerAccepted,
   LOAD_POOLS,
   LOAD_POOL,
   CREATE_POOL,
@@ -16,7 +17,8 @@ import {
   CREATE_WAGER,
   DELETE_WAGER,
   ADD_USER,
-  INVITE_USER
+  INVITE_USER,
+  ACCEPT_WAGER
 } from '../actions/pools';
 
 export function* loadPools({ userEmail }) {
@@ -70,7 +72,7 @@ export function* createWager({ poolId, wager }) {
     const response = yield call(api.createWager, poolId, wager);
     if (response) {
       yield put(wagerCreated(response));
-      yield put(navTo(POOL_ROUTE.replace(':poolId', poolId)));
+      yield put(navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', response.addition.wagers._id)));
     }
   } catch (err) {
     console.error(err);
@@ -110,6 +112,18 @@ export function* inviteUser({ poolId, inviteEmail }) {
   }
 }
 
+export function* acceptWager({ poolId, wagerId, userEmail }) {
+  try {
+    const response = yield call(api.acceptWager, poolId, wagerId, userEmail);
+    if (response) {
+      yield put(wagerAccepted(response));
+      yield loadPool({ poolId });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* loadPoolsWatcher() {
   yield takeLatest(LOAD_POOLS, loadPools);
 }
@@ -140,4 +154,8 @@ export function* addUserWatcher() {
 
 export function* inviteUserWatcher() {
   yield takeLatest(INVITE_USER, inviteUser);
+}
+
+export function* acceptWagerWatcher() {
+  yield takeLatest(ACCEPT_WAGER, acceptWager);
 }
