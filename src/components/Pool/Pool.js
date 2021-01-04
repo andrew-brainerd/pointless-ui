@@ -12,7 +12,7 @@ import Icon from '../common/Icon/Icon';
 import styles from './Pool.module.scss';
 import TextInput from '../common/TextInput/TextInput';
 
-const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
+const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isInvitingUser, setIsInvitingUser] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -33,10 +33,13 @@ const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, invite
     }
   }, [userEmail, pool.users, addUser, poolId]);
 
+  console.log('User ID', userId);
+
   return (
     <>
       <SubHeader className={styles.subHeader}>
         <div className={styles.poolName}>{pool.name}</div>
+        {userId && <div className={styles.points}>{pool.pointTotals[userId]} pts</div>}
         <div className={styles.buttonContainer}>
           <Button
             className={styles.usersButton}
@@ -157,6 +160,7 @@ const Pool = ({ userEmail, poolId, isLoading, pool, loadPool, deletePool, invite
 
 Pool.propTypes = {
   userEmail: string,
+  userId: string,
   poolId: string,
   isLoading: bool,
   pool: object,
