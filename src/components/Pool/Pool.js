@@ -19,6 +19,9 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
   const prevPoolId = usePrevious(poolId);
   const shouldLoadPool = poolId && prevPoolId !== poolId;
   const hasSingleUser = (pool.users || []).length === 1;
+  const activeWagers = (pool.wagers || []).filter(wager => wager.isActive && !wager.isComplete);
+  const inactiveWagers = (pool.wagers || []).filter(wager => !wager.isActive);
+  const completeWagers = (pool.wagers || []).filter(wager => wager.isComplete);
 
   useEffect(() => {
     shouldLoadPool && loadPool(poolId);
@@ -81,25 +84,71 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
               <div className={styles.noWagers}>
                 No Wagers
               </div>
-            ) : (pool.wagers || []).map(wager => {
-              const completeClass = wager.winners && wager.winners.includes(userEmail) ? styles.winner : styles.loser;
-              return (
-                <div
-                  key={wager._id}
-                  className={[
-                    styles.wager,
-                    !wager.isActive ? styles.inactive : '',
-                    wager.isComplete ? completeClass : ''
-                  ].join(' ')}
-                  onClick={() => {
-                    navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
-                  }}
-                >
-                  <div className={styles.amount}>{wager.amount} pts.</div>
-                  <div className={styles.description}>{wager.description}</div>
+            ) : (
+              <>
+                {/* <div className={styles.wagerGroupHeading}>New</div> */}
+                <div className={styles.inactiveWagers}>
+                  {(inactiveWagers || []).map(wager => {
+                    console.log('Wager', wager);
+                    return (
+                      <div
+                        key={wager._id}
+                        className={[
+                          styles.wager,
+                          styles.inactive,
+                          wager.createdBy !== userEmail ? styles.waiting : ''
+                        ].join(' ')}
+                        onClick={() => {
+                          navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
+                        }}
+                      >
+                        <div className={styles.amount}>{wager.amount}</div>
+                        <div className={styles.description}>{wager.description}</div>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+                {/* <div className={styles.wagerGroupHeading}>Active</div> */}
+                <div className={styles.activeWagers}>
+                  {(activeWagers || []).map(wager => {
+                    return (
+                      <div
+                        key={wager._id}
+                        className={styles.wager}
+                        onClick={() => {
+                          navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
+                        }}
+                      >
+                        <div className={styles.amount}>{wager.amount}</div>
+                        <div className={styles.description}>{wager.description}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* <div className={styles.wagerGroupHeading}>Complete</div> */}
+                <div className={styles.completeWagers}>
+                  {(completeWagers || []).map(wager => {
+                    const completeClass = wager.winners && wager.winners.includes(userEmail) ? styles.winner : styles.loser;
+                    return (
+                      <div
+                        key={wager._id}
+                        className={[
+                          styles.wager,
+                          !wager.isActive ? styles.inactive : '',
+                          wager.isComplete ? completeClass : ''
+                        ].join(' ')}
+                        onClick={() => {
+                          navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
+                        }}
+                      >
+                        <div className={styles.amount}>{wager.amount}</div>
+                        <div className={styles.description}>{wager.description}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
           {isUsersModalOpen && (
             <Modal

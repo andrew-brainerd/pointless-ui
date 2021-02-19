@@ -31,24 +31,37 @@
 .pool {
   margin-bottom: 50px;
 
-  .wagerList {
-    align-items: center;
+  .wagerGroupHeading {
+    border-bottom: 2px solid $gray-0;
+    font-size: 26px;
+    margin: 0 auto 25px auto;
+    max-width: 700px;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .activeWagers,
+  .inactiveWagers,
+  .completeWagers {
     color: $gray-0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin: 0 50px 75px 50px;
 
     .wager {
-      @include gridTile();
+      @include listItem();
 
       color: $gray-0;
-      flex-direction: column;
-      padding: 15px 10px;
+      justify-content: flex-start;
+      padding: 15px;
+      width: 85%;
 
       &.inactive {
         border: 2px dashed;
         opacity: 0.6;
+
+        &.waiting {
+          border: 2px transparent;
+          background: #9999ff;
+          opacity: 1;
+        }
       }
 
       &.winner {
@@ -62,11 +75,15 @@
       .amount {
         font-size: 32px;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-right: 25px;
+        width: 50px;
       }
 
       .description {
         font-size: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }

@@ -52,7 +52,10 @@
     gap: 20px;
 
     .pool {
-      @include gridTile();
+      @include listItem();
+
+      height: 100px;
+      width: 250px;
     }
   }
 }
