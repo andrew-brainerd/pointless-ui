@@ -27,3 +27,5 @@ export const getIsAvailableWager = createSelector(
 );
 
 export const getIsAcceptingWager = path(['pools', 'isAcceptingWager']);
+
+export const getIsCompletingWager = path(['pool', 'isCompletingWager']);

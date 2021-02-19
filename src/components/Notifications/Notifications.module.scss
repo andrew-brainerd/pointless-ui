@@ -31,11 +31,39 @@
     transition: 0.3s all ease;
     width: 90%;
 
-    a:link, a:active, a:visited {
+    a:link,
+    a:active,
+    a:visited {
       border: none;
       color: $gray-0;
       outline: none;
       text-decoration: none;
+    }
+
+    .controls {
+      align-items: center;
+      display: flex;
+
+      .readButton {
+        background: #6987a6;
+        border: 1px solid $gray-0;
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-block;
+        height: 10px;
+        margin-left: 25px;
+        transition: 0.3s all ease;
+        width: 10px;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+
+      .dismissButton {
+        background: transparent;
+        margin-left: 10px;
+      }
     }
 
     &.read {
@@ -86,35 +114,11 @@
       }
 
       &.disabled {
-        .title, .message, .timestamp {
+        .title,
+        .message,
+        .timestamp {
           cursor: default;
         }
-      }
-    }
-
-    .controls {
-      align-items: center;
-      display: flex;
-
-      .readButton {
-        background: #6987a6;
-        border: 1px solid $gray-0;
-        border-radius: 50%;
-        cursor: pointer;
-        display: inline-block;
-        height: 10px;
-        margin-left: 25px;
-        transition: 0.3s all ease;
-        width: 10px;
-
-        &:hover {
-          background: transparent;
-        }
-      }
-
-      .dismissButton {
-        background: transparent;
-        margin-left: 10px;
       }
     }
   }

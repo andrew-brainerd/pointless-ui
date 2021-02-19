@@ -11,17 +11,21 @@ const Wager = ({
   isLoading,
   isAvailableWager,
   isAcceptingWager,
+  isCompletingWager,
   userEmail,
   poolId,
   wager = {},
   loadPool,
   acceptWager,
+  completeWager,
   deleteWager,
   navTo
 }) => {
   useEffect(() => {
     userEmail && poolId && loadPool(poolId);
   }, [userEmail, loadPool, poolId]);
+
+  console.log('Wager', wager);
 
   return isLoading ? <Loading message={'Loading Wager'} /> : (
     <>
@@ -50,13 +54,21 @@ const Wager = ({
               disabled={isAcceptingWager || isLoading}
             />
           )}
-          <Button
-            type={'hazard'}
-            onClick={() => {
-              deleteWager(poolId, wager._id);
-            }}
-            text={'Cancel Wager'}
-          />
+          {wager.isActive && !wager.isComplete && (
+            <Button
+              className={styles.acceptButton}
+              text={'Complete Wager'}
+              onClick={() => completeWager(poolId, wager._id, userEmail)}
+              disabled={isCompletingWager || isLoading}
+            />
+          )}
+          {!wager.isComplete && (
+            <Button
+              type={'hazard'}
+              onClick={() => deleteWager(poolId, wager._id)}
+              text={'Cancel Wager'}
+            />
+          )}
         </div>
       </div>
     </>
@@ -67,6 +79,7 @@ Wager.propTypes = {
   isLoading: bool,
   isAvailableWager: bool,
   isAcceptingWager: bool,
+  isCompletingWager: bool,
   userEmail: string,
   poolId: string,
   wagerId: string,
@@ -77,6 +90,7 @@ Wager.propTypes = {
   }),
   loadPool: func.isRequired,
   acceptWager: func.isRequired,
+  completeWager: func.isRequired,
   deleteWager: func.isRequired,
   navTo: func.isRequired
 };

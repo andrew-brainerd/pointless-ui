@@ -33,13 +33,11 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
     }
   }, [userEmail, pool.users, addUser, poolId]);
 
-  console.log('User ID', userId);
-
   return (
     <>
       <SubHeader className={styles.subHeader}>
         <div className={styles.poolName}>{pool.name}</div>
-        {userId && <div className={styles.points}>{pool.pointTotals[userId]} pts</div>}
+        {userId && <div className={styles.points}>{((pool || {}).pointTotals || {})[userId]} pts</div>}
         <div className={styles.buttonContainer}>
           <Button
             className={styles.usersButton}
@@ -76,28 +74,32 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
           )}
         </div>
       </SubHeader>
-      {isLoading ? <Loading message={'Loading Pool'} /> : (
+      {isLoading || !userId ? <Loading message={'Loading Pool'} /> : (
         <div className={styles.pool}>
           <div className={styles.wagerList}>
             {!pool.wagers || isEmpty(pool.wagers) ? (
               <div className={styles.noWagers}>
                 No Wagers
               </div>
-            ) : (pool.wagers || []).map(wager => (
-              <div
-                key={wager._id}
-                className={[
-                  styles.wager,
-                  !wager.isActive ? styles.inactive : ''
-                ].join(' ')}
-                onClick={() => {
-                  navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
-                }}
-              >
-                <div className={styles.amount}>{wager.amount} pts.</div>
-                <div className={styles.description}>{wager.description}</div>
-              </div>
-            ))}
+            ) : (pool.wagers || []).map(wager => {
+              const completeClass = wager.winners && wager.winners.includes(userEmail) ? styles.winner : styles.loser;
+              return (
+                <div
+                  key={wager._id}
+                  className={[
+                    styles.wager,
+                    !wager.isActive ? styles.inactive : '',
+                    wager.isComplete ? completeClass : ''
+                  ].join(' ')}
+                  onClick={() => {
+                    navTo(WAGER_ROUTE.replace(':poolId', poolId).replace(':wagerId', wager._id));
+                  }}
+                >
+                  <div className={styles.amount}>{wager.amount} pts.</div>
+                  <div className={styles.description}>{wager.description}</div>
+                </div>
+              );
+            })}
           </div>
           {isUsersModalOpen && (
             <Modal

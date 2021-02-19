@@ -53,7 +53,6 @@ const NewWager = ({ isLoading, isCreatingWager, poolId, userEmail, poolUsers, lo
         <Select
           className={styles.selectUsers}
           options={remainingUsers}
-          value={'-1'}
           onChange={selectedUser => {
             setWager({
               ...wager,
@@ -65,7 +64,16 @@ const NewWager = ({ isLoading, isCreatingWager, poolId, userEmail, poolUsers, lo
           {wager.users.filter(email => email !== userEmail).map((email, u) => {
             return (
               <div key={u} className={styles.selectedUser}>
-                {email}
+                <div className={styles.selectedUserEmail}>{email}</div>
+                <div
+                  className={styles.remove}
+                  onClick={() => {
+                    setWager({
+                      ...wager,
+                      users: wager.users.filter(user => user !== email)
+                    });
+                  }}
+                >x</div>
               </div>
             );
           })}

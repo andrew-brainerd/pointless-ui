@@ -17,6 +17,8 @@ export const INVITE_USER = `${PREFIX}/INVITE_USER`;
 export const USER_INVITED = `${PREFIX}/USER_INVITED`;
 export const ADD_USER = `${PREFIX}/ADD_USER`;
 export const WAGER_ACCEPTED = `${PREFIX}/WAGER_ACCEPTED`;
+export const COMPLETE_WAGER = `${PREFIX}/COMPLETE_WAGER`;
+export const WAGER_COMPLETED = `${PREFIX}/WAGER_COMPLETED`;
 
 export const loadPools = userEmail => ({ type: LOAD_POOLS, userEmail });
 export const poolsLoaded = pools => ({ type: POOLS_LOADED, pools });
@@ -35,3 +37,5 @@ export const inviteUser = (poolId, inviteEmail) => ({ type: INVITE_USER, poolId,
 export const userInvited = userEmail => ({ type: USER_INVITED, userEmail });
 export const addUser = (poolId, userEmail) => ({ type: ADD_USER, poolId, userEmail });
 export const wagerAccepted = wager => ({ type: WAGER_ACCEPTED, wager });
+export const completeWager = (poolId, wagerId, userEmail) => ({ type: COMPLETE_WAGER, poolId, wagerId, userEmail });
+export const wagerCompleted = wager => ({ type: WAGER_COMPLETED, wager });

@@ -29,7 +29,7 @@
     background: $errorRed;
   }
 
-  &:active {
+  &:active:not(.disabled) {
     background: black;
   }
 }

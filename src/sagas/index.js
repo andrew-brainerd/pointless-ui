@@ -8,7 +8,8 @@ import {
   deleteWagerWatcher,
   addUserWatcher,
   inviteUserWatcher,
-  acceptWagerWatcher
+  acceptWagerWatcher,
+  completeWagerWatcher
 } from './pools';
 import {
   loadNotificationsWatcher,
@@ -31,6 +32,7 @@ export default function* rootSaga() {
     markAllNotificationAsReadWatcher(),
     markNotificationAsReadWatcher(),
     markNotificationAsDismissedWatcher(),
-    acceptWagerWatcher()
+    acceptWagerWatcher(),
+    completeWagerWatcher()
   ]);
 }

@@ -1,3 +1,5 @@
+@import '../../styles/colors';
+
 .newWager {
   align-items: center;
   display: flex;
@@ -34,6 +36,23 @@
     .selectUsers {
       select {
         width: 300px;
+      }
+    }
+
+    .selectedUsers {
+      background: $gray-70;
+      border: 2px solid $gray-0;
+      height: 200px;
+      margin-top: 5px;
+
+      .selectedUser {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+
+        .remove {
+          cursor: pointer;
+        }
       }
     }
   }

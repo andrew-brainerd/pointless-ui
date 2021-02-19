@@ -6,7 +6,9 @@ import {
   CREATE_WAGER,
   WAGER_CREATED,
   ACCEPT_WAGER,
-  WAGER_ACCEPTED
+  WAGER_ACCEPTED,
+  COMPLETE_WAGER,
+  WAGER_COMPLETED
 } from '../actions/pools';
 
 export const initialState = {
@@ -14,6 +16,7 @@ export const initialState = {
   isLoadingPool: true,
   isCreatingWager: false,
   isAcceptingWager: false,
+  isCompletingWager: false,
   userPools: [],
   selectedPool: {}
 };
@@ -64,6 +67,16 @@ const pools = (state = initialState, action) => {
       return {
         ...state,
         isAcceptingWager: false
+      };
+    case COMPLETE_WAGER:
+      return {
+        ...state,
+        isCompletingWager: true
+      };
+    case WAGER_COMPLETED:
+      return {
+        ...state,
+        isCompletingWager: false
       };
     default:
       return state;
