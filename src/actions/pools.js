@@ -37,5 +37,7 @@ export const inviteUser = (poolId, inviteEmail) => ({ type: INVITE_USER, poolId,
 export const userInvited = userEmail => ({ type: USER_INVITED, userEmail });
 export const addUser = (poolId, userEmail) => ({ type: ADD_USER, poolId, userEmail });
 export const wagerAccepted = wager => ({ type: WAGER_ACCEPTED, wager });
-export const completeWager = (poolId, wagerId, userEmail) => ({ type: COMPLETE_WAGER, poolId, wagerId, userEmail });
+export const completeWager = (poolId, wagerId, userEmail, winnerEmail) => ({
+  type: COMPLETE_WAGER, poolId, wagerId, userEmail, winnerEmail
+});
 export const wagerCompleted = wager => ({ type: WAGER_COMPLETED, wager });

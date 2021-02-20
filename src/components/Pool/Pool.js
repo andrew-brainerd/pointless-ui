@@ -21,7 +21,7 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
   const hasSingleUser = (pool.users || []).length === 1;
   const activeWagers = (pool.wagers || []).filter(wager => wager.isActive && !wager.isComplete);
   const inactiveWagers = (pool.wagers || []).filter(wager => !wager.isActive);
-  const completeWagers = (pool.wagers || []).filter(wager => wager.isComplete);
+  const completedWagers = (pool.wagers || []).filter(wager => wager.isComplete);
 
   useEffect(() => {
     shouldLoadPool && loadPool(poolId);
@@ -126,8 +126,8 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
                   })}
                 </div>
                 {/* <div className={styles.wagerGroupHeading}>Complete</div> */}
-                <div className={styles.completeWagers}>
-                  {(completeWagers || []).map(wager => {
+                <div className={styles.completedWagers}>
+                  {(completedWagers || []).map(wager => {
                     const completeClass = wager.winners && wager.winners.includes(userEmail) ? styles.winner : styles.loser;
                     return (
                       <div

@@ -73,8 +73,8 @@ export const acceptWager = async (poolId, wagerId, userEmail) => {
   return response;
 };
 
-export const completeWager = async (poolId, wagerId, userEmail) => {
-  const response = await client.patch(`/pools/${poolId}/wagers/${wagerId}/complete`, { userEmail })
+export const completeWager = async (poolId, wagerId, completedBy, winnerEmail) => {
+  const response = await client.patch(`/pools/${poolId}/wagers/${wagerId}/complete`, { completedBy, winnerEmail })
     .then(prop('data'))
     .catch(err => console.error(err));
 

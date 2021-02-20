@@ -126,9 +126,9 @@ export function* acceptWager({ poolId, wagerId, userEmail }) {
   }
 }
 
-export function* completeWager({ poolId, wagerId, userEmail }) {
+export function* completeWager({ poolId, wagerId, userEmail, winnerEmail }) {
   try {
-    const response = yield call(api.completeWager, poolId, wagerId, userEmail);
+    const response = yield call(api.completeWager, poolId, wagerId, userEmail, winnerEmail);
     if (response) {
       yield put(wagerCompleted(response));
       yield loadPool({ poolId });

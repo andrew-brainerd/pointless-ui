@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { bool, string, shape, number, func } from 'prop-types';
 import { POOL_ROUTE } from '../../constants/routes';
 import Button from '../common/Button/Button';
 import Loading from '../common/Loading/Loading';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Icon from '../common/Icon/Icon';
+import WinnersModal from '../WinnersModal/container';
 import styles from './Wager.module.scss';
 
 const Wager = ({
@@ -17,10 +18,11 @@ const Wager = ({
   wager = {},
   loadPool,
   acceptWager,
-  completeWager,
   deleteWager,
   navTo
 }) => {
+  const [isWinnersModalOpen, setIsWinnersModalOpen] = useState(false);
+
   useEffect(() => {
     userEmail && poolId && loadPool(poolId);
   }, [userEmail, loadPool, poolId]);
@@ -58,7 +60,7 @@ const Wager = ({
             <Button
               className={styles.acceptButton}
               text={'Complete Wager'}
-              onClick={() => completeWager(poolId, wager._id, userEmail)}
+              onClick={() => setIsWinnersModalOpen(true)}
               disabled={isCompletingWager || isLoading}
             />
           )}
@@ -71,6 +73,9 @@ const Wager = ({
           )}
         </div>
       </div>
+      {isWinnersModalOpen &&
+        <WinnersModal setIsModalOpen={setIsWinnersModalOpen} />
+      }
     </>
   );
 };
@@ -90,7 +95,6 @@ Wager.propTypes = {
   }),
   loadPool: func.isRequired,
   acceptWager: func.isRequired,
-  completeWager: func.isRequired,
   deleteWager: func.isRequired,
   navTo: func.isRequired
 };
