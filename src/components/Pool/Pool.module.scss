@@ -31,59 +31,66 @@
 .pool {
   margin-bottom: 50px;
 
-  .wagerGroupHeading {
-    border-bottom: 2px solid $gray-0;
-    font-size: 26px;
-    margin: 0 auto 25px auto;
-    max-width: 700px;
-    padding: 10px;
-    width: 90%;
-  }
+  .wagerList {
+    .noWagers {
+      text-align: center;
+    }
 
-  .activeWagers,
-  .inactiveWagers,
-  .completedWagers {
-    color: $gray-0;
+    .wagerGroupHeading {
+      border-bottom: 2px solid $gray-0;
+      font-size: 26px;
+      margin: 0 auto 25px auto;
+      max-width: 700px;
+      padding: 10px;
+      width: 90%;
+    }
 
-    .wager {
-      @include listItem();
-
+    .activeWagers,
+    .inactiveWagers,
+    .completedWagers {
       color: $gray-0;
-      justify-content: flex-start;
-      padding: 15px;
-      width: 85%;
 
-      &.inactive {
-        border: 2px dashed;
-        opacity: 0.6;
+      .wager {
+        @include listItem();
 
-        &.waiting {
-          border: 2px transparent;
-          background: #9999ff;
-          opacity: 1;
+        color: $gray-0;
+        justify-content: flex-start;
+        padding: 15px;
+        user-select: none;
+        width: 85%;
+
+        &.inactive {
+          border: 2px dashed;
+          opacity: 0.6;
+
+          &.waiting {
+            border: 2px transparent;
+            background: #9999ff;
+            opacity: 1;
+          }
         }
-      }
 
-      &.winner {
-        background: $winnerBackground;
-      }
+        &.winner {
+          background: $winnerBackground;
+        }
 
-      &.loser {
-        background: $loserBackground;
-      }
+        &.loser {
+          background: $loserBackground;
+        }
 
-      .amount {
-        font-size: 32px;
-        font-weight: bold;
-        margin-right: 25px;
-        width: 50px;
-      }
+        .amount {
+          font-size: 32px;
+          font-weight: bold;
+          margin-right: 25px;
+          width: 50px;
+        }
 
-      .description {
-        font-size: 20px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        .description {
+          font-size: 20px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }

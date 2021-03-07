@@ -18,7 +18,6 @@ const WinnersModal = ({ poolId, wagerId, pool, userEmail, completeWager, setIsMo
       isOpen={true}
       isDraggable={false && !isMobile}
       headerText={'Choose the Winner'}
-      contentHeight={250}
       closeModal={() => {
         setIsModalOpen(false);
       }}
