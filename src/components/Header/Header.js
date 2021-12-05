@@ -26,8 +26,16 @@ const Header = ({
   const menuRef = useRef();
 
   useEffect(() => {
-    user && setCurrentUser(user);
-  }, [user, setCurrentUser]);
+    if (!isAuthenticated && !isLoading) {
+      loginWithRedirect({
+        appState: {
+          targetUrl: window.location.pathname
+        }
+      });
+    } else {
+      user && setCurrentUser(user);
+    }
+  }, [isLoading, isAuthenticated, loginWithRedirect, user, setCurrentUser]);
 
   useEffect(() => {
     if (userEmail) {

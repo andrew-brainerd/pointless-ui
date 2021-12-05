@@ -6,7 +6,7 @@ import { navTo } from '../../actions/routing';
 import Home from './Home';
 
 const mapStateToProps = state => ({
-  isLoading: getIsLoadingPools(state),
+  isLoadingPools: getIsLoadingPools(state),
   userEmail: getCurrentUserEmail(state),
   userPools: getUserPools(state)
 });

@@ -12,6 +12,7 @@ import {
 } from '../../constants/routes';
 import Home from '../Home/container';
 import Header from '../Header/container';
+import Content from '../Content/container';
 import Pool from '../Pool/container';
 import NewWager from '../NewWager/container';
 import Wager from '../Wager/container';
@@ -32,18 +33,20 @@ const App = ({ history, isSubHeaderOpen }) => {
         }>
         <ConnectedRouter history={history}>
           <Header />
-          <div className={[
-            styles.content,
-            isSubHeaderOpen ? styles.subHeaderOpen : ''
-          ].join(' ')}>
-            <Switch>
-              <Route path={HOME_ROUTE} exact component={Home} />
-              <Route path={POOL_ROUTE} exact component={Pool} />
-              <Route path={NEW_WAGER_ROUTE} exact component={NewWager} />
-              <Route path={WAGER_ROUTE} exact component={Wager} />
-              <Route path={NOTIFICATIONS_ROUTE} exact component={Notifications} />
-            </Switch>
-          </div>
+          <Content>
+            <div className={[
+              styles.content,
+              isSubHeaderOpen ? styles.subHeaderOpen : ''
+            ].join(' ')}>
+              <Switch>
+                <Route path={HOME_ROUTE} exact component={Home} />
+                <Route path={POOL_ROUTE} exact component={Pool} />
+                <Route path={NEW_WAGER_ROUTE} exact component={NewWager} />
+                <Route path={WAGER_ROUTE} exact component={Wager} />
+                <Route path={NOTIFICATIONS_ROUTE} exact component={Notifications} />
+              </Switch>
+            </div>
+          </Content>
         </ConnectedRouter>
       </Auth0Provider>
       <Notification />

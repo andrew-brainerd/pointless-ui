@@ -25,8 +25,9 @@ export const setCurrentUser = user => async dispatch => {
     .then(({ doesNotExist, ...userData }) => {
       if (doesNotExist) {
         dispatch(createUser(user));
+      } else {
+        dispatch({ type: SET_CURRENT_USER, user: { ...user, ...userData } });
       }
-      dispatch({ type: SET_CURRENT_USER, user: { ...user, ...userData } });
     })
     .catch(err => dispatch(loadingUserFailed(err)));
 };
@@ -45,7 +46,7 @@ export const checkUsername = username => async dispatch => {
     .catch(err => dispatch(loadingUserFailed(err)));
 };
 
-export const createUser = user => async (dispatch, getState) => {
+export const createUser = user => async dispatch => {
   dispatch(creatingUser);
   usersApi.createUser(user).then(newUser => {
     dispatch({ type: SET_CURRENT_USER, user: { ...newUser, ...user } });

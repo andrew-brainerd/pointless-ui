@@ -9,8 +9,6 @@ import styles from './WinnersModal.module.scss';
 const WinnersModal = ({ poolId, wagerId, pool, userEmail, completeWager, setIsModalOpen }) => {
   const [winnerEmail, setWinnerEmail] = useState(userEmail);
 
-  console.log('Pool', pool.users);
-
   return (
     <Modal
       className={styles.modal}

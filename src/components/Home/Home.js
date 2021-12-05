@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { bool, string, array, func } from 'prop-types';
 import { isMobile } from 'react-device-detect';
-import { useAuth0 } from '@auth0/auth0-react';
 import { POOL_ROUTE } from '../../constants/routes';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Button from '../common/Button/Button';
@@ -10,16 +9,15 @@ import Loading from '../common/Loading/Loading';
 import styles from './Home.module.scss';
 import Icon from '../common/Icon/Icon';
 
-const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo }) => {
+const Home = ({ isLoadingPools, userEmail, userPools, loadPools, createPool, navTo }) => {
   const [isCreatingNewPool, setIsCreatingNewPool] = useState(false);
   const [newPoolName, setNewPoolName] = useState('');
-  const { isLoading: isLoadingUser } = useAuth0();
 
   useEffect(() => {
     userEmail && loadPools(userEmail);
   }, [userEmail, loadPools]);
 
-  return userEmail && !isLoadingUser ? (
+  return userEmail ? (
     <>
       <SubHeader>
         {isCreatingNewPool && (
@@ -66,7 +64,7 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
           />
         )}
       </SubHeader>
-      {(isLoading || isLoadingUser) ? <Loading message={'Loading Pools'} /> : (
+      {isLoadingPools ? <Loading message={'Loading Pools'} /> : (
         <div className={[styles.home, isMobile ? styles.mobile : ''].join(' ')}>
           <div className={styles.pageHeader}>
             <div className={styles.myPools}>
@@ -97,7 +95,7 @@ const Home = ({ isLoading, userEmail, userPools, loadPools, createPool, navTo })
 };
 
 Home.propTypes = {
-  isLoading: bool,
+  isLoadingPools: bool,
   isLoadingUser: bool,
   userEmail: string,
   userPools: array,

@@ -27,8 +27,6 @@ const Wager = ({
     userEmail && poolId && loadPool(poolId);
   }, [userEmail, loadPool, poolId]);
 
-  console.log('Wager', wager);
-
   return isLoading ? <Loading message={'Loading Wager'} /> : (
     <>
       <SubHeader className={styles.subHeader}>

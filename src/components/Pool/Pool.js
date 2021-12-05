@@ -89,7 +89,6 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
                 {/* <div className={styles.wagerGroupHeading}>New</div> */}
                 <div className={styles.inactiveWagers}>
                   {(inactiveWagers || []).map(wager => {
-                    console.log('Wager', wager);
                     return (
                       <div
                         key={wager._id}
