@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { completeWager } from '../../actions/pools';
-import { getSelectedPool } from '../../selectors/pools';
-import { getPoolId, getWagerId } from '../../selectors/routing';
-import { getCurrentUserEmail } from '../../selectors/user';
+import { completeWager } from '../../../actions/pools';
+import { getSelectedPool } from '../../../selectors/pools';
+import { getPoolId, getWagerId } from '../../../selectors/routing';
+import { getCurrentUserEmail } from '../../../selectors/user';
 import WinnersModal from './WinnersModal';
 
 const mapStateToProps = state => ({

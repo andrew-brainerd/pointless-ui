@@ -2,23 +2,6 @@
 @import '../../styles/mixins';
 @import '../../styles/sizing';
 
-.buttonContainer {
-  align-items: center;
-  display: flex;
-
-  > div {
-    align-items: center;
-    display: flex;
-    margin-left: 10px;
-
-    svg {
-      fill: $gray-0;
-      height: 30px;
-      width: 30px;
-    }
-  }
-}
-
 .subHeader {
   justify-content: space-between;
   width: 100%;
@@ -92,27 +75,6 @@
           white-space: nowrap;
         }
       }
-    }
-  }
-}
-
-/* Modal Styles */
-.modal {
-  .modalContent {
-    display: flex;
-    position: relative;
-
-    .selectedWager {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-    }
-
-    .buttonContainer {
-      align-self: flex-end;
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
     }
   }
 }

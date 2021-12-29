@@ -5,7 +5,7 @@ import Button from '../common/Button/Button';
 import Loading from '../common/Loading/Loading';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Icon from '../common/Icon/Icon';
-import WinnersModal from '../WinnersModal/container';
+import WinnersModal from '../modals/WinnersModal/container';
 import styles from './Wager.module.scss';
 
 const Wager = ({

@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { string, bool, object, func } from 'prop-types';
-import { isMobile } from 'react-device-detect';
 import { isEmpty } from 'ramda';
 import { NEW_WAGER_ROUTE, WAGER_ROUTE } from '../../constants/routes';
 import usePrevious from '../../hooks/usePrevious';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Loading from '../common/Loading/Loading';
-import Modal from '../common/Modal/Modal';
 import Button from '../common/Button/Button';
 import Icon from '../common/Icon/Icon';
+import UsersModal from '../modals/UsersModal/container';
+import ButtonContainer from '../common/ButtonContainer/ButtonContainer';
 import styles from './Pool.module.scss';
-import TextInput from '../common/TextInput/TextInput';
 
-const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool, inviteUser, addUser, navTo }) => {
+const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool, addUser, navTo }) => {
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
-  const [isInvitingUser, setIsInvitingUser] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState('');
   const prevPoolId = usePrevious(poolId);
   const shouldLoadPool = poolId && prevPoolId !== poolId;
   const hasSingleUser = (pool.users || []).length === 1;
@@ -41,7 +38,7 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
       <SubHeader className={styles.subHeader}>
         <div className={styles.poolName}>{pool.name}</div>
         {userId && <div className={styles.points}>{((pool || {}).pointTotals || {})[userId]} pts</div>}
-        <div className={styles.buttonContainer}>
+        <ButtonContainer>
           <Button
             className={styles.usersButton}
             onClick={() => setIsUsersModalOpen(true)}
@@ -75,7 +72,7 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
               <Icon name={'trash'} title={'Delete Pool'} />
             </Button>
           )}
-        </div>
+        </ButtonContainer>
       </SubHeader>
       {isLoading || !userId ? <Loading message={'Loading Pool'} /> : (
         <div className={styles.pool}>
@@ -149,59 +146,7 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
               </>
             )}
           </div>
-          {isUsersModalOpen && (
-            <Modal
-              className={styles.modal}
-              contentClassName={styles.modalContent}
-              isOpen={isUsersModalOpen}
-              isDraggable={false && !isMobile}
-              headerText={'Users in Pool'}
-              contentHeight={250}
-              closeModal={() => {
-                setIsUsersModalOpen(false);
-              }}
-            >
-              {isInvitingUser ? (
-                <div className={styles.inviteUser}>
-                  <TextInput
-                    value={inviteEmail}
-                    onChange={setInviteEmail}
-                    autofocus
-                  />
-                </div>
-              ) : (
-                <div className={styles.currentUsers}>
-                  {pool.users.map((email, e) => (
-                    <div key={e} className={styles.user}>
-                      {email}
-                    </div>
-                  ))}
-                </div>
-              )}
-              <div className={styles.buttonContainer}>
-                <Button
-                  type={isInvitingUser ? 'hazard' : 'primary'}
-                  onClick={() => {
-                    setIsInvitingUser(!isInvitingUser);
-                  }}
-                  text={isInvitingUser ? 'Cancel' : 'Invite User'}
-                />
-                <Button
-                  type={isInvitingUser ? 'primary' : 'default'}
-                  onClick={() => {
-                    if (isInvitingUser) {
-                      inviteUser(poolId, inviteEmail);
-                    } else {
-                      setIsUsersModalOpen(false);
-                    }
-                    setIsInvitingUser(false);
-                  }}
-                  text={isInvitingUser ? 'Invite' : 'Close'}
-                  disabled={isInvitingUser ? inviteEmail === '' : false}
-                />
-              </div>
-            </Modal>
-          )}
+          {isUsersModalOpen && <UsersModal openHandler={setIsUsersModalOpen} />}
         </div>
       )}
     </>

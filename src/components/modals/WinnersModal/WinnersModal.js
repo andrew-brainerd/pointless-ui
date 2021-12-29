@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { string, object, func } from 'prop-types';
 import { isMobile } from 'react-device-detect';
-import Modal from '../common/Modal/Modal';
-import Select from '../common/Select/Select';
-import Button from '../common/Button/Button';
+import Modal from '../../common/Modal/Modal';
+import Select from '../../common/Select/Select';
+import Button from '../../common/Button/Button';
 import styles from './WinnersModal.module.scss';
 
 const WinnersModal = ({ poolId, wagerId, pool, userEmail, completeWager, setIsModalOpen }) => {
