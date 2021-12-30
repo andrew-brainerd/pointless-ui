@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { bool, string, array, func } from 'prop-types';
 import { isMobile } from 'react-device-detect';
-import { POOL_ROUTE } from '../../constants/routes';
+import { POOL_ROUTE, NEW_POOL_SETTINGS_ROUTE } from '../../constants/routes';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Button from '../common/Button/Button';
 import TextInput from '../common/TextInput/TextInput';
@@ -59,7 +59,7 @@ const Home = ({ isLoadingPools, userEmail, userPools, loadPools, createPool, nav
         {!isCreatingNewPool && (
           <Button
             className={styles.newPool}
-            onClick={() => setIsCreatingNewPool(true)}
+            onClick={() => navTo(NEW_POOL_SETTINGS_ROUTE)}
             text={'New Pool'}
           />
         )}

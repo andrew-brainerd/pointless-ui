@@ -6,6 +6,8 @@ import { Route, Switch } from 'react-router-dom';
 import {
   HOME_ROUTE,
   POOL_ROUTE,
+  POOL_SETTINGS_ROUTE,
+  NEW_POOL_SETTINGS_ROUTE,
   NEW_WAGER_ROUTE,
   NOTIFICATIONS_ROUTE,
   WAGER_ROUTE
@@ -14,6 +16,7 @@ import Home from '../Home/container';
 import Header from '../Header/container';
 import Content from '../Content/container';
 import Pool from '../Pool/container';
+import PoolSettings from '../PoolSettings/container';
 import NewWager from '../NewWager/container';
 import Wager from '../Wager/container';
 import Notifications from '../Notifications/container';
@@ -41,6 +44,8 @@ const App = ({ history, isSubHeaderOpen }) => {
               <Switch>
                 <Route path={HOME_ROUTE} exact component={Home} />
                 <Route path={POOL_ROUTE} exact component={Pool} />
+                <Route path={POOL_SETTINGS_ROUTE} exact component={PoolSettings} />
+                <Route path={NEW_POOL_SETTINGS_ROUTE} exact component={PoolSettings} />
                 <Route path={NEW_WAGER_ROUTE} exact component={NewWager} />
                 <Route path={WAGER_ROUTE} exact component={Wager} />
                 <Route path={NOTIFICATIONS_ROUTE} exact component={Notifications} />

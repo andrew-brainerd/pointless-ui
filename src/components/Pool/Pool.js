@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { string, bool, object, func } from 'prop-types';
 import { isEmpty } from 'ramda';
-import { NEW_WAGER_ROUTE, WAGER_ROUTE } from '../../constants/routes';
+import { NEW_WAGER_ROUTE, POOL_SETTINGS_ROUTE, WAGER_ROUTE } from '../../constants/routes';
 import usePrevious from '../../hooks/usePrevious';
 import SubHeader from '../common/SubHeader/SubHeader';
 import Loading from '../common/Loading/Loading';
@@ -55,6 +55,15 @@ const Pool = ({ userEmail, userId, poolId, isLoading, pool, loadPool, deletePool
             disabled={hasSingleUser}
           >
             <Icon name={'plus'} title={'New Wager'} />
+          </Button>
+          <Button
+            className={styles.settingsButton}
+            onClick={() => {
+              navTo(POOL_SETTINGS_ROUTE.replace(':poolId', poolId));
+            }}
+            text={'Pool Settings'}
+          >
+            <Icon name={'trash'} title={'Pool Settings'} />
           </Button>
           {(pool.wagers || []).length === 0 && (
             <Button
@@ -161,8 +170,6 @@ Pool.propTypes = {
   pool: object,
   loadPool: func.isRequired,
   deletePool: func.isRequired,
-  deleteWager: func.isRequired,
-  inviteUser: func.isRequired,
   addUser: func.isRequired,
   navTo: func.isRequired
 };
