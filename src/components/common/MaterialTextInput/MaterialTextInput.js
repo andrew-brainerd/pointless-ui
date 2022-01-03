@@ -41,7 +41,9 @@ MaterialTextInput.propTypes = {
     touched: bool,
     error: string
   }),
-  defaultValue: string
+  defaultValue: string,
+  value: string,
+  onChange: func
 };
 
 export default MaterialTextInput;

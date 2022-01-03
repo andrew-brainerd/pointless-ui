@@ -64,7 +64,7 @@ const PoolSettings = ({ userEmail, isNewPool, isLoadingPool, poolId, pool, loadP
                       value={poolName}
                       onChange={e => {
                         // console.log('Value', e.target.value);
-                        console.log('Submit Disabled', { submitting, pristine ,successMessage });
+                        console.log('Submit Disabled', { submitting, pristine, successMessage });
                         setPoolName(e.target.value);
                       }}
                       {...fieldProps}

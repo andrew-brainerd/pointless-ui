@@ -13,6 +13,7 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications,
     userEmail && loadNotifications(userEmail, true);
   }, [userEmail, loadNotifications]);
 
+
   return isLoading ? <Loading message='Loading Notifications' /> : (
     <div className={styles.notifications}>
       {userEmail && isEmpty(notifications) ? (
@@ -29,7 +30,7 @@ const Notifications = ({ isLoading, userEmail, notifications, loadNotifications,
               disabled={isEmpty(notifications.filter(n => !n.isRead))}
             />
           </div>
-          <TransitionGroup>
+          <TransitionGroup className={styles.notificationList}>
             {notifications.map(notification => {
               return (
                 <CSSTransition
