@@ -1,18 +1,10 @@
-/* stylelint-disable */
-@import './styles/colors';
-@import './styles/sizing';
-
-html {
-  height: 100vh;
-}
+@import './styles/colors.scss';
+@import './styles/normalize.scss';
+@import './styles/scrollbar.scss';
+@import './styles/sizing.scss';
 
 body {
-  background: #07071f;
-  background: $gray-20;
-  background: #332e4c;
   background: #262239;
-  // box-shadow: inset 0 0 25px black;
-  height: 100vh;
   margin: 0;
   min-width: $appMinWidth;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,6 +13,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  position: relative;
   width: 100%;
 }
 
@@ -29,64 +22,37 @@ code {
     monospace;
 }
 
+h1 {
+  font-size: 5vw;
+}
+
+a {
+  &:active,
+  &:link,
+  &:visited {
+    color: white;
+  }
+}
+
 #root {
   margin: 0 auto;
-  height: 100vh;
+  padding: 15px;
 }
 
-::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
-  border: 1px solid $gray-20;
+.fadeAnimation-enter {
+  opacity: 0;
 }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 9px;
-  background-color: $gray-20;
-  border: 4px solid transparent;
-  background-clip: content-box;
-
-  &:hover {
-    background-color: $gray-40;
-  }
-
-  &:active {
-    background-color: $gray-60;
-  }
+.fadeAnimation-enter-active {
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track:hover,
-::-webkit-scrollbar-track:active {
-  box-sizing: border-box;
-  border: 1px solid $gray-20;
+.fadeAnimation-exit {
+  opacity: 1;
 }
 
-::-webkit-scrollbar-button:single-button {
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-::-webkit-scrollbar-button:horizontal:end:increment:single-button { /* Right */
-  background-size: 45%;
-  display: none;
-}
-
-::-webkit-scrollbar-button:horizontal:start:decrement:single-button { /* Left */
-  display: none;
-}
-
-::-webkit-scrollbar-button:vertical:end:increment:single-button { /* Down */
-  display: none;
-}
-
-::-webkit-scrollbar-button:vertical:start:decrement:single-button { /* Up */
-  background-size: 70%;
-  display: none;
-}
-
-::-webkit-scrollbar-corner {
-  background: $gray-2-5;
-  border-right: 1px solid $gray-20;
-  border-bottom: 1px solid $gray-20;
+.fadeAnimation-exit-active {
+  opacity: 0;
+  transition: all 0.3s ease;
 }

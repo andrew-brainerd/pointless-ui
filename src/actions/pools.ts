@@ -1,0 +1,43 @@
+import { Pool, Wager } from '../types/pools';
+
+const PREFIX = 'POOLS';
+
+export const LOAD_POOLS = `${PREFIX}/LOAD_POOLS`;
+export const POOLS_LOADED = `${PREFIX}/POOLS_LOADED`;
+export const LOAD_POOL = `${PREFIX}/LOAD_POOL`;
+export const POOL_LOADED = `${PREFIX}/POOL_LOADED`;
+export const CREATE_POOL = `${PREFIX}/CREATE_POOL`;
+export const POOL_CREATED = `${PREFIX}/POOL_CREATED`;
+export const DELETE_POOL = `${PREFIX}/DELETE_POOL`;
+export const POOL_DELETED = `${PREFIX}/POOL_DELETED`;
+export const CREATE_WAGER = `${PREFIX}/CREATE_WAGER`;
+export const WAGER_CREATED = `${PREFIX}/WAGER_CREATED`;
+export const ACCEPT_WAGER = `${PREFIX}/ACCEPT_WAGER`;
+export const DELETE_WAGER = `${PREFIX}/DELETE_WAGER`;
+export const WAGER_DELETED = `${PREFIX}/WAGER_DELETED`;
+export const INVITE_USER = `${PREFIX}/INVITE_USER`;
+export const USER_INVITED = `${PREFIX}/USER_INVITED`;
+export const ADD_USER = `${PREFIX}/ADD_USER`;
+export const WAGER_ACCEPTED = `${PREFIX}/WAGER_ACCEPTED`;
+export const COMPLETE_WAGER = `${PREFIX}/COMPLETE_WAGER`;
+export const WAGER_COMPLETED = `${PREFIX}/WAGER_COMPLETED`;
+
+export const loadPools = (userEmail: string) => ({ type: LOAD_POOLS, userEmail });
+export const poolsLoaded = (pools: Array<Pool>) => ({ type: POOLS_LOADED, pools });
+export const loadPool = (poolId: string) => ({ type: LOAD_POOL, poolId });
+export const poolLoaded = (pool: Pool) => ({ type: POOL_LOADED, pool });
+export const createPool = (name: string, createdBy: string) => ({ type: CREATE_POOL, name, createdBy });
+export const poolCreated = (pool: Pool) => ({ type: POOL_CREATED, pool });
+export const deletePool = (poolId: string) => ({ type: DELETE_POOL, poolId });
+export const poolDeleted = (pool: Pool) => ({ type: POOL_DELETED, pool });
+export const createWager = (poolId: string, createdBy: string, wager: Wager) => ({ type: CREATE_WAGER, poolId, createdBy, wager });
+export const wagerCreated = (wager: Wager) => ({ type: WAGER_CREATED, wager });
+export const acceptWager = (poolId: string, wagerId: string, userEmail: string) => ({ type: ACCEPT_WAGER, poolId, wagerId, userEmail });
+export const deleteWager = (poolId: string, wagerId: string) => ({ type: DELETE_WAGER, poolId, wagerId });
+export const wagerDeleted = (wager: Wager) => ({ type: WAGER_DELETED, wager });
+export const inviteUser = (poolId: string, userEmail: string) => ({ type: INVITE_USER, poolId, userEmail });
+export const userInvited = (userEmail: string) => ({ type: USER_INVITED, userEmail });
+export const addUser = (poolId: string, userEmail: string) => ({ type: ADD_USER, poolId, userEmail });
+export const wagerAccepted = (wager: Wager) => ({ type: WAGER_ACCEPTED, wager });
+export const completeWager = (poolId: string, wagerId: string, userEmail: string, winnerEmail: string) => ({ type: COMPLETE_WAGER, poolId, wagerId, userEmail, winnerEmail });
+export const wagerCompleted = (wager: Wager) => ({ type: WAGER_COMPLETED, wager });
